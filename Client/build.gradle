@@ -1,0 +1,47 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.8'
+}
+
+group 'rezolvare_razboi'
+
+repositories {
+    mavenCentral()
+}
+application{
+    mainClass="Main"
+}
+javafx {
+    version = "17"
+    modules = [ 'javafx.controls', 'javafx.fxml']
+}
+jar{
+
+    duplicatesStrategy(DuplicatesStrategy.EXCLUDE)
+    manifest{
+        attributes('Main-Class':'Main')
+    }
+    from{
+        configurations.runtimeClasspath.collect{it.isDirectory() ? it:zipTree(it)}
+    }
+}
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+
+    // https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.17.1'
+    // https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.17.1'
+
+
+    implementation project (':Model')
+    implementation project (':Services')
+    implementation project (':Networking')
+
+}
+
+test {
+    useJUnitPlatform()
+}

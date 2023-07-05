@@ -1,0 +1,9 @@
+rootProject.name = 'rezolvare_razboi'
+include 'Client'
+include 'Model'
+include 'Networking'
+include 'Persistance'
+include 'RESTServices'
+include 'Server'
+include 'Services'
+
