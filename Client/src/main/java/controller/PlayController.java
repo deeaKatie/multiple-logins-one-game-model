@@ -9,6 +9,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import model.Card;
 import model.User;
 import services.IObserver;
 import services.IServices;
@@ -20,9 +21,11 @@ import java.util.ArrayList;
 
 public class PlayController implements IObserver {
     ObservableList<User> modelPlayers = FXCollections.observableArrayList();
+    ObservableList<Card> modelCards = FXCollections.observableArrayList();
 
     private IServices service;
     private User loggedUser;
+
     @FXML
     Label usernameLabel;
     @FXML
@@ -34,7 +37,7 @@ public class PlayController implements IObserver {
     @FXML
     ListView<User> playersListViewPS;
     @FXML
-    ListView<String> cardsListViewPS;
+    ListView<Card> cardsListViewPS;
     @FXML
     Label playersLabelPS;
     @FXML
@@ -43,6 +46,9 @@ public class PlayController implements IObserver {
     // SS
     @FXML
     Button startGameButtonSS;
+
+
+    boolean sentToWaiting = false;
 
     public void setService(IServices service) {
         this.service = service;
@@ -60,17 +66,21 @@ public class PlayController implements IObserver {
         cardsLabelPS.setVisible(true);
     }
     public void init_StartScreen(){
-        startGameButtonSS.setVisible(true);
-        playersLabelPS.setVisible(false);
-        cardsLabelPS.setVisible(false);
-        playersListViewPS.setVisible(false);
-        cardsListViewPS.setVisible(false);
-        gameStatusLabel.setVisible(false);
+        if (!sentToWaiting) {
+            startGameButtonSS.setVisible(true);
+            playersLabelPS.setVisible(false);
+            cardsLabelPS.setVisible(false);
+            playersListViewPS.setVisible(false);
+            cardsListViewPS.setVisible(false);
+            gameStatusLabel.setVisible(false);
+        }
     }
     public void init_WaitScreen(){
         playersListViewPS.setVisible(false);
         cardsListViewPS.setVisible(false);
-        gameStatusLabel.setText("Waiting for game to finish!\n");
+        gameStatusLabel.setText("Waiting...");
+        cardsLabelPS.setVisible(false);
+        playersLabelPS.setVisible(false);
     }
 
     @FXML
@@ -103,8 +113,16 @@ public class PlayController implements IObserver {
             init_PlayScreen();
 
             modelPlayers.setAll(players.getPlayers());
-
             playersListViewPS.setItems(modelPlayers);
+
+            modelCards.setAll(players.getDeck().getCards());
+            cardsListViewPS.setItems(modelCards);
         });
+    }
+
+
+    public void sendToWaitingRoom() {
+        sentToWaiting = true;
+        init_WaitScreen();
     }
 }

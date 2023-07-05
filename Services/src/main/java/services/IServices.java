@@ -10,4 +10,6 @@ public interface IServices {
     void logout(User user) throws ServiceException;
 
     void startGame(Long user_id) throws ServiceException;
+
+    String checkGameState();
 }

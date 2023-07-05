@@ -50,6 +50,11 @@ public class ServicesRpcProxy implements IServices {
             String err = response.data().toString();
             this.closeConnection();
             throw new ServiceException(err);
+        } else if (response.type() == ResponseType.WAITING_ROOM) {
+
+            client.sendToWaitingRoom();
+            loggedUser = (User) response.data();
+            return loggedUser;
         }
         return null;
     }
@@ -125,6 +130,9 @@ public class ServicesRpcProxy implements IServices {
                 ex.printStackTrace();
             }
         }
+        if (response.type() == ResponseType.WAITING_ROOM) {
+            client.sendToWaitingRoom();
+        }
     }
     private boolean isUpdate(Response response) {
         return response.type() == ResponseType.GAME_STARTED;
@@ -180,5 +188,10 @@ public class ServicesRpcProxy implements IServices {
             }
 
         }
+    }
+
+    @Override
+    public String checkGameState() {
+        return null;
     }
 }

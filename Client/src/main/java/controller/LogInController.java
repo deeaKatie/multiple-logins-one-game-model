@@ -42,6 +42,7 @@ public class LogInController {
 
             Stage stage = (Stage) buttonLogIn.getScene().getWindow();
             PlayController playCtrl = fxmlLoader.getController();
+
             user = service.checkLogIn(user, playCtrl);
             System.out.println("USER: " + user);
             System.out.println("sdada");

@@ -12,6 +12,7 @@ import java.io.ObjectOutputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.Socket;
+import java.util.Objects;
 
 public class ClientRpcReflectionWorker implements Runnable, IObserver {
     private IServices service;
@@ -100,7 +101,12 @@ public class ClientRpcReflectionWorker implements Runnable, IObserver {
 
         try {
             User newUser = this.service.checkLogIn(user, this);
-            return (new Response.Builder()).type(ResponseType.OK).data(newUser).build();
+
+            if (Objects.equals(service.checkGameState(), "playing")) {
+                return (new Response.Builder()).type(ResponseType.WAITING_ROOM).data(newUser).build();
+            } else {
+                return (new Response.Builder()).type(ResponseType.OK).data(newUser).build();
+            }
         } catch (ServiceException ex) {
             this.connected = false;
             return (new Response.Builder()).type(ResponseType.ERROR).data(ex.getMessage()).build();
@@ -141,5 +147,16 @@ public class ClientRpcReflectionWorker implements Runnable, IObserver {
         } catch (Exception ex) {
             System.out.println("Error trying to send game staretd response");
         }
+    }
+
+    @Override
+    public void sendToWaitingRoom() {
+        Response response = (new Response.Builder()).type((ResponseType.WAITING_ROOM)).build();
+        try {
+            sendResponse(response);
+        } catch (Exception ex) {
+            System.out.println("Error tryning to send user to waiting room response");
+        }
+
     }
 }

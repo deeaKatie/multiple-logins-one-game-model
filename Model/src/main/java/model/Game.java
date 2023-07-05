@@ -12,13 +12,13 @@ public class Game implements HasId<Long> {
     @OneToMany//(fetch = FetchType.EAGER)
     @MapKeyJoinColumn(name = "user_id")
     private Map<model.User, Deck> players;
-    @OneToMany()
-    @MapKeyJoinColumn(name = "user_id")
-    private Map<model.User, Deck> winners;
+    //@OneToMany
+    //@MapKeyJoinColumn(name = "user_id")
+    //private Map<model.User, Deck> winners;
 
     public Game() {
         players = new HashMap<>();
-        winners = new HashMap<>();
+        //winners = new HashMap<>();
     }
 
     public void addPlayer(model.User player, Deck deck){

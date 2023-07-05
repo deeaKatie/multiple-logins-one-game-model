@@ -1,3 +1,5 @@
+import repository.CardDBRepository;
+import repository.ICardDBRepository;
 import repository.IUserRepository;
 import repository.UserDBRepository;
 import service.Service;
@@ -26,8 +28,10 @@ public class StartServer {
             System.err.println("Cannot find server.properties " + var21);
             return;
         }
+
         IUserRepository userRepository = new UserDBRepository(serverProps);
-        IServices service=new Service(userRepository);
+        ICardDBRepository cardDBRepository = new CardDBRepository(serverProps);
+        IServices service=new Service(userRepository, cardDBRepository);
 
         int serverPort = defaultPort;
         try {

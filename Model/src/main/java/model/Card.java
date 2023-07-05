@@ -1,6 +1,9 @@
 package model;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -8,6 +11,8 @@ import javax.persistence.Table;
 @Table(name = "cards")
 public class Card implements HasId<Long> {
     @Id
+    @GeneratedValue(generator = "increment")
+    @GenericGenerator(name = "increment", strategy = "increment")
     private Long id;
     private String value;
 

@@ -4,30 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ccfa7e6b-654c-463b-a268-93519fa570db" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Persistance/src/main/java/dialect/SQLiteDialect.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Persistance/src/main/java/dialect/identity/SQLiteDialectIdentityColumnSupport.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Persistance/src/main/java/repository/IRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Persistance/src/main/java/repository/IUserRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Persistance/src/main/java/repository/JdbcUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Persistance/src/main/java/repository/UserDBRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Services/src/main/java/services/IObserver.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Services/src/main/java/services/IServices.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Services/src/main/java/services/ServiceException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
+    <list default="true" id="ccfa7e6b-654c-463b-a268-93519fa570db" name="Changes" comment="first working version, w/ log in &amp; showing users">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/controller/LogInController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/controller/LogInController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/controller/PlayController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/controller/PlayController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/src/main/java/model/Card.java" beforeDir="false" afterPath="$PROJECT_DIR$/Model/src/main/java/model/Card.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/src/main/java/model/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/Model/src/main/java/model/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Networking/src/main/java/rpcprotocol/ClientRpcReflectionWorker.java" beforeDir="false" afterPath="$PROJECT_DIR$/Networking/src/main/java/rpcprotocol/ClientRpcReflectionWorker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Networking/src/main/java/rpcprotocol/ResponseType.java" beforeDir="false" afterPath="$PROJECT_DIR$/Networking/src/main/java/rpcprotocol/ResponseType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Networking/src/main/java/rpcprotocol/ServicesRpcProxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/Networking/src/main/java/rpcprotocol/ServicesRpcProxy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Persistance/src/main/resources/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Persistance/src/main/resources/hibernate.cfg.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/hibernateORM.db" beforeDir="false" afterPath="$PROJECT_DIR$/Server/hibernateORM.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/StartServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/StartServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/service/Service.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/service/Service.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Services/src/main/java/services/IObserver.java" beforeDir="false" afterPath="$PROJECT_DIR$/Services/src/main/java/services/IObserver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Services/src/main/java/services/IServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/Services/src/main/java/services/IServices.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/razboiDB.db" beforeDir="false" afterPath="$PROJECT_DIR$/razboiDB.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,6 +99,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -237,11 +234,34 @@
       <workItem from="1687173963527" duration="127000" />
       <workItem from="1687178425066" duration="174000" />
       <workItem from="1687178630668" duration="18579000" />
-      <workItem from="1688571902403" duration="2427000" />
+      <workItem from="1688571902403" duration="14263000" />
     </task>
+    <task id="LOCAL-00001" summary="first working version, w/ log in &amp; showing users">
+      <created>1688574514383</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1688574514384</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="first working version, w/ log in &amp; showing users" />
+    <option name="LAST_COMMIT_MESSAGE" value="first working version, w/ log in &amp; showing users" />
   </component>
 </project>

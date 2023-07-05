@@ -19,6 +19,9 @@
 
         <mapping resource="model/User.hbm.xml"/>
 <!--        <mapping class="model.User"/>-->
+
+        <mapping class="model.Card"/>
+        <mapping class="model.Deck"/>
         <mapping class="model.Game"/>
     </session-factory>
 </hibernate-configuration>
