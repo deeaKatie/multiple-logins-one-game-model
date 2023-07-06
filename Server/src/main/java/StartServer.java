@@ -1,8 +1,5 @@
 import model.User;
-import repository.CardDBRepository;
-import repository.ICardDBRepository;
-import repository.IUserRepository;
-import repository.UserDBRepository;
+import repository.*;
 import service.Service;
 import services.IServices;
 import utils.AbstractServer;
@@ -31,7 +28,8 @@ public class StartServer {
 
         IUserRepository userRepository = new UserDBRepository(serverProps);
         ICardDBRepository cardDBRepository = new CardDBRepository(serverProps);
-        IServices service=new Service(userRepository, cardDBRepository);
+        IGameDBRepository gameDBRepository = new GameDBRepository(serverProps);
+        IServices service=new Service(userRepository, cardDBRepository, gameDBRepository);
 
         int serverPort = defaultPort;
         try {

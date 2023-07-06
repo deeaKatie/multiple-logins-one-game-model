@@ -3,17 +3,20 @@ package service;
 import dto.PlayersDTO;
 import dto.RoundEndDTO;
 import dto.UserMoveDTO;
+import dto.WinnerDTO;
 import exception.RepositoryException;
 import model.Card;
 import model.Deck;
 import model.Game;
 import model.User;
 import repository.ICardDBRepository;
+import repository.IGameDBRepository;
 import repository.IUserRepository;
 import services.IObserver;
 import services.IServices;
 import services.ServiceException;
 
+import java.sql.SQLOutput;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -21,6 +24,7 @@ public class Service implements IServices {
 
     private IUserRepository userRepository;
     private ICardDBRepository cardDBRepository;
+    private IGameDBRepository gameDBRepository;
     private Map<Long, IObserver> loggedClients; // key - id , val - observer
     private Map<Long, IObserver> playingClients; // key - id , val - observer
 
@@ -30,9 +34,10 @@ public class Service implements IServices {
 
     private Game game;
 
-    public Service(IUserRepository userRepository, ICardDBRepository cardDBRepository) {
+    public Service(IUserRepository userRepository, ICardDBRepository cardDBRepository, IGameDBRepository gameDBRepository) {
         this.userRepository = userRepository;
         this.cardDBRepository = cardDBRepository;
+        this.gameDBRepository = gameDBRepository;
         this.loggedClients = new ConcurrentHashMap<>();
         this.playingClients = new ConcurrentHashMap<>();
         this.currentRoundCards = new ConcurrentHashMap<>();
@@ -250,7 +255,10 @@ public class Service implements IServices {
     }
 
     @Override
-    public void sendWinnerCards(Deck deck) throws ServiceException {
-
+    public void sendWinnerCards(WinnerDTO data) throws ServiceException {
+        game.addWinner(data.getWinner(), data.getWinnerDeck());
+        gameDBRepository.add(game);
+        System.out.println("SERVICE -> Game saved to DB!\n");
     }
+
 }

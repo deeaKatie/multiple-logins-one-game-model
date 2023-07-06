@@ -1,6 +1,7 @@
 package services;
 
 import dto.UserMoveDTO;
+import dto.WinnerDTO;
 import model.Card;
 import model.Deck;
 import model.User;
@@ -20,5 +21,5 @@ public interface IServices {
 
     boolean noMoreCards(User loggedUser) throws ServiceException;
 
-    void sendWinnerCards(Deck deck) throws ServiceException;
+    void sendWinnerCards(WinnerDTO data) throws ServiceException;
 }

@@ -3,6 +3,7 @@ package rpcprotocol;
 import dto.PlayersDTO;
 import dto.RoundEndDTO;
 import dto.UserMoveDTO;
+import dto.WinnerDTO;
 import model.Card;
 import model.Deck;
 import model.User;
@@ -245,8 +246,8 @@ public class ServicesRpcProxy implements IServices {
     }
 
     @Override
-    public void sendWinnerCards(Deck deck) throws ServiceException {
-        Request req =(new Request.Builder()).type(RequestType.WINNER_CARDS).data(deck).build();
+    public void sendWinnerCards(WinnerDTO data) throws ServiceException {
+        Request req =(new Request.Builder()).type(RequestType.WINNER_CARDS).data(data).build();
         sendRequest(req);
         Response response = readResponse();
 

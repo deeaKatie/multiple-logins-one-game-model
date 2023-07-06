@@ -3,6 +3,7 @@ package controller;
 import dto.PlayersDTO;
 import dto.RoundEndDTO;
 import dto.UserMoveDTO;
+import dto.WinnerDTO;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -158,7 +159,8 @@ public class PlayController implements IObserver {
                     deck.addCard(c);
                 }
                 try {
-                    service.sendWinnerCards(deck);
+                    WinnerDTO data = new WinnerDTO(loggedUser, deck);
+                    service.sendWinnerCards(data);
                 } catch (Exception e) {
                     MessageAlert.showMessage(null, Alert.AlertType.ERROR,"Error logging out", e.getMessage());
                 }

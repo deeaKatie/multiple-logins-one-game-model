@@ -26,10 +26,10 @@ public class Game implements HasId<Long> {
         players.put(player, deck);
     }
 
-//
-//    public void addWinner(User player, Deck deck){
-//        winners.put(player, deck);
-//    }
+
+    public void addWinner(User player, Deck deck){
+        winners.put(player, deck);
+    }
 
     public Long getId() {
         return id;
@@ -46,14 +46,14 @@ public class Game implements HasId<Long> {
     public void setPlayers(Map<User, Deck> players) {
         this.players = players;
     }
-//
-//    public Map<User, Deck> getWinners() {
-//        return winners;
-//    }
-//
-//    public void setWinners(Map<User, Deck> winners) {
-//        this.winners = winners;
-//    }
+
+    public Map<User, Deck> getWinners() {
+        return winners;
+    }
+
+    public void setWinners(Map<User, Deck> winners) {
+        this.winners = winners;
+    }
 
     @Override
     public String toString() {

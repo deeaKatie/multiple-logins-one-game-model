@@ -3,6 +3,7 @@ package rpcprotocol;
 import dto.PlayersDTO;
 import dto.RoundEndDTO;
 import dto.UserMoveDTO;
+import dto.WinnerDTO;
 import model.Card;
 import model.Deck;
 import model.User;
@@ -172,7 +173,7 @@ public class ClientRpcReflectionWorker implements Runnable, IObserver {
     private Response handleWINNER_CARDS(Request request) {
         System.out.println("WORKER -> handleWINNER_CARDS");
         try {
-            service.sendWinnerCards((Deck) request.data());
+            service.sendWinnerCards((WinnerDTO) request.data());
             return (new Response.Builder().type(ResponseType.OK)).build();
         } catch (ServiceException ex) {
             return (new Response.Builder().type(ResponseType.ERROR)).data(ex.getMessage()).build();
