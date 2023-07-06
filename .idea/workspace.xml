@@ -6,15 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="ccfa7e6b-654c-463b-a268-93519fa570db" name="Changes" comment="cards &amp; waiting room">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/controller/PlayController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/controller/PlayController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/MainScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/MainScreen.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Networking/src/main/java/rpcprotocol/ClientRpcReflectionWorker.java" beforeDir="false" afterPath="$PROJECT_DIR$/Networking/src/main/java/rpcprotocol/ClientRpcReflectionWorker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Networking/src/main/java/rpcprotocol/RequestType.java" beforeDir="false" afterPath="$PROJECT_DIR$/Networking/src/main/java/rpcprotocol/RequestType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Networking/src/main/java/rpcprotocol/ResponseType.java" beforeDir="false" afterPath="$PROJECT_DIR$/Networking/src/main/java/rpcprotocol/ResponseType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Networking/src/main/java/rpcprotocol/ServicesRpcProxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/Networking/src/main/java/rpcprotocol/ServicesRpcProxy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/java/service/Service.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/service/Service.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Services/src/main/java/services/IObserver.java" beforeDir="false" afterPath="$PROJECT_DIR$/Services/src/main/java/services/IObserver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Services/src/main/java/services/IServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/Services/src/main/java/services/IServices.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,7 +87,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="click_card" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -238,7 +229,14 @@
       <option name="project" value="LOCAL" />
       <updated>1688574514384</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="cards &amp; waiting room">
+      <created>1688625229939</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1688625229939</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -257,6 +255,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="first working version, w/ log in &amp; showing users" />
-    <option name="LAST_COMMIT_MESSAGE" value="first working version, w/ log in &amp; showing users" />
+    <MESSAGE value="cards &amp; waiting room" />
+    <option name="LAST_COMMIT_MESSAGE" value="cards &amp; waiting room" />
   </component>
 </project>
