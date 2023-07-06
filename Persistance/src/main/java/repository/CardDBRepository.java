@@ -74,4 +74,5 @@ public class CardDBRepository implements ICardDBRepository {
 
         return cards;
     }
+
 }

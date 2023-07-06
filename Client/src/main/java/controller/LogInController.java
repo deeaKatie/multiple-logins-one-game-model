@@ -12,12 +12,9 @@ import model.User;
 import services.IServices;
 import services.ServiceException;
 import utils.MessageAlert;
-
 import java.io.IOException;
 
 public class LogInController {
-
-
     @FXML
     private Button buttonLogIn;
     @FXML

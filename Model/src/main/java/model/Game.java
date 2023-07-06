@@ -13,9 +13,9 @@ public class Game implements HasId<Long> {
     @MapKeyJoinColumn(name = "user_id")
     private Map<model.User, Deck> players;
 
-    //@OneToMany
-    //@MapKeyJoinColumn(name = "user_id")
-    //private Map<model.User, Deck> winners;
+    @OneToMany
+    @MapKeyJoinColumn(name = "user_id")
+    private Map<model.User, Deck> winners;
 
     public Game() {
         players = new HashMap<>();

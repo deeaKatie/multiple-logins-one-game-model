@@ -5,16 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ccfa7e6b-654c-463b-a268-93519fa570db" name="Changes" comment="cards &amp; waiting room">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/main/java/controller/PlayController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/controller/PlayController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/controller/LogInController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/controller/LogInController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Model/src/main/java/model/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/Model/src/main/java/model/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Networking/src/main/java/rpcprotocol/ClientRpcReflectionWorker.java" beforeDir="false" afterPath="$PROJECT_DIR$/Networking/src/main/java/rpcprotocol/ClientRpcReflectionWorker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Networking/src/main/java/rpcprotocol/RequestType.java" beforeDir="false" afterPath="$PROJECT_DIR$/Networking/src/main/java/rpcprotocol/RequestType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Networking/src/main/java/rpcprotocol/ResponseType.java" beforeDir="false" afterPath="$PROJECT_DIR$/Networking/src/main/java/rpcprotocol/ResponseType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Networking/src/main/java/rpcprotocol/ServicesRpcProxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/Networking/src/main/java/rpcprotocol/ServicesRpcProxy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/java/service/Service.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/service/Service.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Services/src/main/java/services/IObserver.java" beforeDir="false" afterPath="$PROJECT_DIR$/Services/src/main/java/services/IObserver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Services/src/main/java/services/IServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/Services/src/main/java/services/IServices.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Persistance/src/main/java/repository/CardDBRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Persistance/src/main/java/repository/CardDBRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/hibernateORM.db" beforeDir="false" afterPath="$PROJECT_DIR$/Server/hibernateORM.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/StartServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/StartServer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
