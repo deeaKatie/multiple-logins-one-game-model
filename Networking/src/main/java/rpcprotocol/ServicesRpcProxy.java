@@ -247,6 +247,7 @@ public class ServicesRpcProxy implements IServices {
 
     @Override
     public void sendWinnerCards(WinnerDTO data) throws ServiceException {
+        System.out.println("PROXY -> Send winner cards");
         Request req =(new Request.Builder()).type(RequestType.WINNER_CARDS).data(data).build();
         sendRequest(req);
         Response response = readResponse();

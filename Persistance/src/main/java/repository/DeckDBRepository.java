@@ -1,6 +1,7 @@
 package repository;
 
 import exception.RepositoryException;
+import model.Deck;
 import model.Game;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,14 +16,14 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import java.util.List;
 import java.util.Properties;
 
-public class GameDBRepository implements IGameDBRepository {
+public class DeckDBRepository implements IDeckDBRepository {
 
     private JdbcUtils dbUtils;
     private static final Logger logger= LogManager.getLogger();
     Session session;
 
-    public GameDBRepository(Properties properties) {
-        logger.info("Initializing GameRepo with properties {}",properties);
+    public DeckDBRepository(Properties properties) {
+        logger.info("Initializing DeckDBRepository with properties {}",properties);
         dbUtils = new JdbcUtils(properties);
 
         StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
@@ -31,7 +32,7 @@ public class GameDBRepository implements IGameDBRepository {
     }
 
     @Override
-    public Game add(Game entity) {
+    public Deck add(Deck entity) {
         Transaction transaction = session.beginTransaction();
         Long id = (Long) session.save(entity);
         entity.setId(id);
@@ -40,28 +41,25 @@ public class GameDBRepository implements IGameDBRepository {
     }
 
     @Override
-    public void delete(Game entity) {
+    public void delete(Deck entity) {
 
     }
 
     @Override
-    public void update(Game entity, Long aLong) {
+    public void update(Deck entity, Long aLong) {
 
     }
 
     @Override
-    public Game findById(Long gameId) throws RepositoryException {
-        Transaction transaction = session.beginTransaction();
-        Game entity = session.get(Game.class, gameId);
-        transaction.commit();
-        return entity;
+    public Deck findById(Long aLong) throws RepositoryException {
+        return null;
     }
 
     @Override
-    public Iterable<Game> getAll() {
-        SQLQuery query = session.createSQLQuery("select * from game");
-        query.addEntity(Game.class);
-        List<Game> games = query.list();
-        return games;
+    public Iterable<Deck> getAll() {
+        SQLQuery query = session.createSQLQuery("select * from deck");
+        query.addEntity(Deck.class);
+        List<Deck> entities = query.list();
+        return entities;
     }
 }

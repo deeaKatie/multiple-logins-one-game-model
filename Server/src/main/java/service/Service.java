@@ -10,6 +10,7 @@ import model.Deck;
 import model.Game;
 import model.User;
 import repository.ICardDBRepository;
+import repository.IDeckDBRepository;
 import repository.IGameDBRepository;
 import repository.IUserRepository;
 import services.IObserver;
@@ -25,6 +26,7 @@ public class Service implements IServices {
     private IUserRepository userRepository;
     private ICardDBRepository cardDBRepository;
     private IGameDBRepository gameDBRepository;
+    private IDeckDBRepository deckDBRepository;
     private Map<Long, IObserver> loggedClients; // key - id , val - observer
     private Map<Long, IObserver> playingClients; // key - id , val - observer
 
@@ -34,10 +36,12 @@ public class Service implements IServices {
 
     private Game game;
 
-    public Service(IUserRepository userRepository, ICardDBRepository cardDBRepository, IGameDBRepository gameDBRepository) {
+    public Service(IUserRepository userRepository, ICardDBRepository cardDBRepository,
+                   IGameDBRepository gameDBRepository, IDeckDBRepository deckDBRepository) {
         this.userRepository = userRepository;
         this.cardDBRepository = cardDBRepository;
         this.gameDBRepository = gameDBRepository;
+        this.deckDBRepository = deckDBRepository;
         this.loggedClients = new ConcurrentHashMap<>();
         this.playingClients = new ConcurrentHashMap<>();
         this.currentRoundCards = new ConcurrentHashMap<>();
@@ -144,6 +148,8 @@ public class Service implements IServices {
             }
 
             game.addPlayer(user, deck);
+
+            deckDBRepository.add(deck);
         }
 
         return game;
@@ -256,9 +262,18 @@ public class Service implements IServices {
 
     @Override
     public void sendWinnerCards(WinnerDTO data) throws ServiceException {
-        game.addWinner(data.getWinner(), data.getWinnerDeck());
+        System.out.println("SERVICE -> Send winner cards");
+        Deck winnerDeck = data.getWinnerDeck();
+        deckDBRepository.add(winnerDeck);
+        game.addWinner(data.getWinner(), winnerDeck);
         gameDBRepository.add(game);
         System.out.println("SERVICE -> Game saved to DB!\n");
+
+        System.out.println("Games in DB:");
+        for(var game : gameDBRepository.getAll()) {
+            System.out.println(game);
+        }
+        System.out.println("End:");
     }
 
 }

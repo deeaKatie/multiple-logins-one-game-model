@@ -1,9 +1,8 @@
 package model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +10,8 @@ import java.util.List;
 @Table(name = "deck")
 public class Deck implements HasId<Long> {
     @Id
+    @GeneratedValue(generator = "increment")
+    @GenericGenerator(name = "increment", strategy = "increment")
     private Long id;
     @OneToMany//(fetch = FetchType.EAGER)
     private List<Card> cards;

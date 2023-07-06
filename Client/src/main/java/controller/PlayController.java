@@ -150,7 +150,8 @@ public class PlayController implements IObserver {
         Platform.runLater(() -> {
             sentToWaiting = false;
             init_StartScreen();
-            if (userStatus == "won") {
+            System.out.println("CTRL -> Received status: " + userStatus);
+            if (Objects.equals(userStatus, "won")) {
                 gameStatusLabel.setText("You won the game!");
                 gameStatusLabel.setVisible(true);
 
@@ -159,6 +160,7 @@ public class PlayController implements IObserver {
                     deck.addCard(c);
                 }
                 try {
+                    System.out.println("CTRL -> Send winner cards");
                     WinnerDTO data = new WinnerDTO(loggedUser, deck);
                     service.sendWinnerCards(data);
                 } catch (Exception e) {

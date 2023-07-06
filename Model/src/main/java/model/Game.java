@@ -1,5 +1,7 @@
 package model;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.util.HashMap;
 import java.util.Map;
@@ -8,6 +10,8 @@ import java.util.Map;
 @Table(name = "game")
 public class Game implements HasId<Long> {
     @Id
+    @GeneratedValue(generator = "increment")
+    @GenericGenerator(name = "increment", strategy = "increment")
     private Long id;
     @OneToMany//(fetch = FetchType.EAGER)
     @MapKeyJoinColumn(name = "user_id")
@@ -19,13 +23,12 @@ public class Game implements HasId<Long> {
 
     public Game() {
         players = new HashMap<>();
-        //winners = new HashMap<>();
+        winners = new HashMap<>();
     }
 
     public void addPlayer(model.User player, Deck deck){
         players.put(player, deck);
     }
-
 
     public void addWinner(User player, Deck deck){
         winners.put(player, deck);
