@@ -9,6 +9,8 @@ public class RoundEndDTO implements HasId<Long> {
 
     ArrayList<Card> roundSelectedCards;
     Long roundWinnerId;
+    Boolean playerWon; // 0 - lost or 1 - won
+    Card playedCard;
 
     public RoundEndDTO() {
     }
@@ -32,6 +34,22 @@ public class RoundEndDTO implements HasId<Long> {
 
     public void setRoundWinnerId(Long roundWinnerId) {
         this.roundWinnerId = roundWinnerId;
+    }
+
+    public Boolean getPlayerWon() {
+        return playerWon;
+    }
+
+    public void setPlayerWon(Boolean playerWon) {
+        this.playerWon = playerWon;
+    }
+
+    public Card getPlayedCard() {
+        return playedCard;
+    }
+
+    public void setPlayedCard(Card playedCard) {
+        this.playedCard = playedCard;
     }
 
     @Override

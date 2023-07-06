@@ -141,7 +141,8 @@ public class ServicesRpcProxy implements IServices {
         }
     }
     private boolean isUpdate(Response response) {
-        return response.type() == ResponseType.GAME_STARTED;
+        return response.type() == ResponseType.GAME_STARTED ||
+                response.type() == ResponseType.ROUND_END;
     }
     private void sendRequest(Request request) throws ServiceException {
         try {
@@ -212,6 +213,21 @@ public class ServicesRpcProxy implements IServices {
             throw new ServiceException(response.data().toString());
         } else if (response.type() == ResponseType.OK) {
             System.out.println("PROXY -> OK RESPONSE");
+        }
+    }
+
+    @Override
+    public void noMoreCards(User loggedUser) throws ServiceException {
+        Request req =(new Request.Builder()).type(RequestType.NO_MORE_CARDS).data(loggedUser).build();
+        sendRequest(req);
+        Response response = readResponse();
+
+        if (response.type() == ResponseType.ERROR) {
+            throw new ServiceException(response.data().toString());
+        } else if (response.type() == ResponseType.OK) {
+            System.out.println("PROXY -> OK RESPONSE");
+            // move user to waiting screen
+            client.sendToWaitingRoom();
         }
     }
 }

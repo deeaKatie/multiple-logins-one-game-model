@@ -152,6 +152,17 @@ public class ClientRpcReflectionWorker implements Runnable, IObserver {
         }
     }
 
+    private Response handleNO_MORE_CARDS(Request request) {
+        System.out.println("WORKER -> handleSELECTED_CARD");
+        try {
+            service.cardSelected((UserMoveDTO) request.data());
+            System.out.println("WORKER -> sending ok response");
+            return okResponse;
+        } catch (ServiceException ex) {
+            return (new Response.Builder().type(ResponseType.ERROR)).data(ex.getMessage()).build();
+        }
+    }
+
     @Override
     public void gameStarted(PlayersDTO players) throws ServiceException {
         System.out.println("WORKER -> gameStarted");

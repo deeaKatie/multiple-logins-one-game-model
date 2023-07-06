@@ -6,6 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="ccfa7e6b-654c-463b-a268-93519fa570db" name="Changes" comment="cards &amp; waiting room">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/controller/PlayController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/controller/PlayController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/MainScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/MainScreen.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/src/main/java/dto/RoundEndDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Model/src/main/java/dto/RoundEndDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Networking/src/main/java/rpcprotocol/ClientRpcReflectionWorker.java" beforeDir="false" afterPath="$PROJECT_DIR$/Networking/src/main/java/rpcprotocol/ClientRpcReflectionWorker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Networking/src/main/java/rpcprotocol/RequestType.java" beforeDir="false" afterPath="$PROJECT_DIR$/Networking/src/main/java/rpcprotocol/RequestType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Networking/src/main/java/rpcprotocol/ServicesRpcProxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/Networking/src/main/java/rpcprotocol/ServicesRpcProxy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/service/Service.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/service/Service.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Services/src/main/java/services/IServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/Services/src/main/java/services/IServices.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

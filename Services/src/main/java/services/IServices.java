@@ -16,4 +16,6 @@ public interface IServices {
     String checkGameState();
 
     void cardSelected(UserMoveDTO move) throws ServiceException;
+
+    void noMoreCards(User loggedUser) throws ServiceException;
 }

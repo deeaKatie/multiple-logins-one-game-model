@@ -14,10 +14,7 @@ import services.IObserver;
 import services.IServices;
 import services.ServiceException;
 
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class Service implements IServices {
@@ -156,28 +153,63 @@ public class Service implements IServices {
             }
         }
 
+        int noOfWinnerCards = 0;
+        for (var user_card : currentRoundCards.entrySet()) {
+            if (Objects.equals(user_card.getValue().getValue(), winnerCard.getValue())) {
+                noOfWinnerCards++;
+                System.out.println("card: " + user_card.getValue().getValue()  + " nr: " + noOfWinnerCards);
+            }
+        }
+
+
+
         RoundEndDTO round = new RoundEndDTO(playedCards, roundWinner);
 
         // all players played cards
         if (currentRoundCards.size() == playingClients.size()) {
+
             for (var player : playingClients.entrySet()) {
+                Long playerId = player.getKey();
+                Card playedCard = currentRoundCards.get(playerId);
+                round.setPlayedCard(playedCard);
+
+                System.out.println("player id: " + playerId + " roundWinner: " + roundWinner);
+                if (Objects.equals(playerId, roundWinner) && noOfWinnerCards == 1) {
+                    System.out.println("TRUE - " + playerId + " - " + roundWinner);
+                    round.setPlayerWon(true);
+                } else {
+                    System.out.println("FALSE - " + playerId + " - " + roundWinner);
+                    round.setPlayerWon(false);
+                }
                 player.getValue().roundFinished(round);
             }
-        }
 
+            //empty data
+            currentRoundCards.clear();
+
+        }
     }
 
     boolean isCardBetter(Card a, Card b) {
-        if ((a == null) ||
-            (a.equals("6") && b.equals("7")) ||
-            (a.equals("7") && b.equals("8")) ||
-            (a.equals("8") && b.equals("9")) ||
-            (a.equals("9") && b.equals("J")) ||
-            (a.equals("J") && b.equals("Q")) ||
-            (a.equals("Q") && b.equals("K")) ||
-            (a.equals("K") && b.equals("A"))) {
+        Map<String, Integer> cardOrder = new HashMap<>();
+        cardOrder.put("6", 0);
+        cardOrder.put("7", 1);
+        cardOrder.put("8", 2);
+        cardOrder.put("9", 3);
+        cardOrder.put("J", 4);
+        cardOrder.put("Q", 5);
+        cardOrder.put("K", 6);
+        cardOrder.put("A", 7);
+
+        if ((b == null) ||
+                (cardOrder.get(a.getValue()) > cardOrder.get(b.getValue()))) {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void noMoreCards(User loggedUser) throws ServiceException {
+
     }
 }

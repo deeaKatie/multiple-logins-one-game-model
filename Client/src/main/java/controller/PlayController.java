@@ -19,7 +19,7 @@ import services.IServices;
 import services.ServiceException;
 import utils.MessageAlert;
 
-import java.util.ArrayList;
+import java.util.Objects;
 
 
 public class PlayController implements IObserver {
@@ -130,10 +130,9 @@ public class PlayController implements IObserver {
     }
 
 
-    public void sendSelectedCard(String value) {
-        Card card = new Card(value);
+    public void sendSelectedCard(Card card) {
         try {
-            UserMoveDTO move = new UserMoveDTO(loggedUser, new Card(value));
+            UserMoveDTO move = new UserMoveDTO(loggedUser, card);
             service.cardSelected(move);
         } catch (Exception e) {
             e.printStackTrace();
@@ -141,13 +140,53 @@ public class PlayController implements IObserver {
     }
 
     public void handleCardSelection(MouseEvent mouseEvent) {
-
+        Card card = cardsListViewPS.getSelectionModel().getSelectedItem();
+        sendSelectedCard(card);
+        cardsListViewPS.setDisable(true);
     }
 
     @Override
     public void roundFinished(RoundEndDTO round) {
-        if (round.getRoundWinnerId() == loggedUser.getId()) {
+        System.out.println("Round finished Controller");
 
-        }
+        Platform.runLater(()-> {
+            cardsListViewPS.setDisable(false);
+            gameStatusLabel.setVisible(true);
+
+            // add all cards if round winner
+            if (!round.getPlayerWon()) {
+                gameStatusLabel.setText("You Lost");
+                // remove card
+                for (var c : modelCards) {
+                    if (Objects.equals(c.getId(), round.getPlayedCard().getId())) {
+                        System.out.println("controller remove card: " + c.getValue());
+                        modelCards.remove(c);
+                        break;
+                    }
+                }
+            } else {
+                String cards = "";
+                for (var card : round.getRoundSelectedCards()) {
+                    if (card.getValue() != round.getPlayedCard().getValue()) {
+                        cards += card.getValue() + " | ";
+                        modelCards.add(card);
+                    }
+                }
+                gameStatusLabel.setText("You Won: " + cards);
+
+            }
+            cardsListViewPS.setItems(modelCards);
+
+            // ran out of cards
+            if (modelCards.isEmpty()) {
+                try {
+                    service.noMoreCards(loggedUser);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+
     }
 }

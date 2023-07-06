@@ -10,7 +10,7 @@
       <Button fx:id="startGameButtonSS" layoutX="232.0" layoutY="155.0" mnemonicParsing="false" onAction="#startGameHandler" prefHeight="68.0" prefWidth="135.0" text="START GAME" visible="false" />
       <Label fx:id="usernameLabel" layoutX="14.0" layoutY="14.0" prefHeight="18.0" prefWidth="236.0" text="Hi, " />
       <Button layoutX="232.0" layoutY="239.0" mnemonicParsing="false" onAction="#logOutHandler" prefHeight="68.0" prefWidth="135.0" text="LOG OUT" visible="false" />
-      <Label fx:id="gameStatusLabel" layoutX="263.0" layoutY="53.0" prefHeight="18.0" prefWidth="54.0" text="You won!" />
+      <Label fx:id="gameStatusLabel" layoutX="263.0" layoutY="53.0" prefHeight="18.0" prefWidth="100" text="You won!" />
       <ListView fx:id="playersListViewPS" layoutX="45.0" layoutY="155.0" prefHeight="200.0" prefWidth="200.0" />
       <ListView onMouseClicked="#handleCardSelection" fx:id="cardsListViewPS" layoutX="325.0" layoutY="155.0" prefHeight="200.0" prefWidth="200.0" />
       <Label fx:id="playersLabelPS" layoutX="126.0" layoutY="95.0" text="Players" />
