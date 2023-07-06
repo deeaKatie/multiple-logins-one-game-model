@@ -1,5 +1,7 @@
 package services;
 
+import dto.UserMoveDTO;
+import model.Card;
 import model.User;
 
 public interface IServices {
@@ -12,4 +14,6 @@ public interface IServices {
     void startGame(Long user_id) throws ServiceException;
 
     String checkGameState();
+
+    void cardSelected(UserMoveDTO move) throws ServiceException;
 }

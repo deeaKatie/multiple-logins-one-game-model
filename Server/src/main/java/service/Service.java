@@ -1,6 +1,8 @@
 package service;
 
 import dto.PlayersDTO;
+import dto.RoundEndDTO;
+import dto.UserMoveDTO;
 import exception.RepositoryException;
 import model.Card;
 import model.Deck;
@@ -24,6 +26,8 @@ public class Service implements IServices {
     private ICardDBRepository cardDBRepository;
     private Map<Long, IObserver> loggedClients; // key - id , val - observer
     private Map<Long, IObserver> playingClients; // key - id , val - observer
+
+    private Map<Long, Card> currentRoundCards;
     private final int defaultThreadsNo = 5;
    // private Map.Entry<Long, IObserver> client;
 
@@ -32,6 +36,7 @@ public class Service implements IServices {
         this.cardDBRepository = cardDBRepository;
         this.loggedClients = new ConcurrentHashMap<>();
         this.playingClients = new ConcurrentHashMap<>();
+        this.currentRoundCards = new ConcurrentHashMap<>();
     }
 
     @Override
@@ -133,4 +138,46 @@ public class Service implements IServices {
         return game;
     }
 
+    @Override
+    public void cardSelected(UserMoveDTO move) throws ServiceException {
+        System.out.println("Card selected in srv");
+
+        currentRoundCards.put(move.getPlayer().getId(), move.getSelectedCard());
+
+        ArrayList<Card> playedCards = new ArrayList<>();
+        Long roundWinner = null;
+        Card winnerCard = null;
+
+        for (var user_card : currentRoundCards.entrySet()) {
+            playedCards.add(user_card.getValue());
+            if (isCardBetter(user_card.getValue(), winnerCard)) {
+                winnerCard = user_card.getValue();
+                roundWinner = user_card.getKey();
+            }
+        }
+
+        RoundEndDTO round = new RoundEndDTO(playedCards, roundWinner);
+
+        // all players played cards
+        if (currentRoundCards.size() == playingClients.size()) {
+            for (var player : playingClients.entrySet()) {
+                player.getValue().roundFinished(round);
+            }
+        }
+
+    }
+
+    boolean isCardBetter(Card a, Card b) {
+        if ((a == null) ||
+            (a.equals("6") && b.equals("7")) ||
+            (a.equals("7") && b.equals("8")) ||
+            (a.equals("8") && b.equals("9")) ||
+            (a.equals("9") && b.equals("J")) ||
+            (a.equals("J") && b.equals("Q")) ||
+            (a.equals("Q") && b.equals("K")) ||
+            (a.equals("K") && b.equals("A"))) {
+            return true;
+        }
+        return false;
+    }
 }

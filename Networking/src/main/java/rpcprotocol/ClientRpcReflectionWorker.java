@@ -1,6 +1,9 @@
 package rpcprotocol;
 
 import dto.PlayersDTO;
+import dto.RoundEndDTO;
+import dto.UserMoveDTO;
+import model.Card;
 import model.User;
 import services.IObserver;
 import services.IServices;
@@ -138,6 +141,17 @@ public class ClientRpcReflectionWorker implements Runnable, IObserver {
         }
     }
 
+    private Response handleSELECTED_CARD(Request request) {
+        System.out.println("WORKER -> handleSELECTED_CARD");
+        try {
+            service.cardSelected((UserMoveDTO) request.data());
+            System.out.println("WORKER -> sending ok response");
+            return okResponse;
+        } catch (ServiceException ex) {
+            return (new Response.Builder().type(ResponseType.ERROR)).data(ex.getMessage()).build();
+        }
+    }
+
     @Override
     public void gameStarted(PlayersDTO players) throws ServiceException {
         System.out.println("WORKER -> gameStarted");
@@ -158,5 +172,15 @@ public class ClientRpcReflectionWorker implements Runnable, IObserver {
             System.out.println("Error tryning to send user to waiting room response");
         }
 
+    }
+
+    @Override
+    public void roundFinished(RoundEndDTO round) {
+        Response response = (new Response.Builder()).type((ResponseType.ROUND_END)).data(round).build();
+        try {
+            sendResponse(response);
+        } catch (Exception ex) {
+            System.out.println("Error tryning to send user to round result response");
+        }
     }
 }

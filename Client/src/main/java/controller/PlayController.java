@@ -1,6 +1,8 @@
 package controller;
 
 import dto.PlayersDTO;
+import dto.RoundEndDTO;
+import dto.UserMoveDTO;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,6 +11,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.input.MouseEvent;
 import model.Card;
 import model.User;
 import services.IObserver;
@@ -124,5 +127,27 @@ public class PlayController implements IObserver {
     public void sendToWaitingRoom() {
         sentToWaiting = true;
         init_WaitScreen();
+    }
+
+
+    public void sendSelectedCard(String value) {
+        Card card = new Card(value);
+        try {
+            UserMoveDTO move = new UserMoveDTO(loggedUser, new Card(value));
+            service.cardSelected(move);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void handleCardSelection(MouseEvent mouseEvent) {
+
+    }
+
+    @Override
+    public void roundFinished(RoundEndDTO round) {
+        if (round.getRoundWinnerId() == loggedUser.getId()) {
+
+        }
     }
 }

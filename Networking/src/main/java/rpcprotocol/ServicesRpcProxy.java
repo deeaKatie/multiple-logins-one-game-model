@@ -1,6 +1,9 @@
 package rpcprotocol;
 
 import dto.PlayersDTO;
+import dto.RoundEndDTO;
+import dto.UserMoveDTO;
+import model.Card;
 import model.User;
 import services.IObserver;
 import services.IServices;
@@ -133,6 +136,9 @@ public class ServicesRpcProxy implements IServices {
         if (response.type() == ResponseType.WAITING_ROOM) {
             client.sendToWaitingRoom();
         }
+        if (response.type() == ResponseType.ROUND_END) {
+            client.roundFinished((RoundEndDTO) response.data());
+        }
     }
     private boolean isUpdate(Response response) {
         return response.type() == ResponseType.GAME_STARTED;
@@ -193,5 +199,19 @@ public class ServicesRpcProxy implements IServices {
     @Override
     public String checkGameState() {
         return null;
+    }
+
+
+    @Override
+    public void cardSelected(UserMoveDTO move) throws ServiceException {
+        Request req =(new Request.Builder()).type(RequestType.SELECTED_CARD).data(move).build();
+        sendRequest(req);
+        Response response = readResponse();
+
+        if (response.type() == ResponseType.ERROR) {
+            throw new ServiceException(response.data().toString());
+        } else if (response.type() == ResponseType.OK) {
+            System.out.println("PROXY -> OK RESPONSE");
+        }
     }
 }
