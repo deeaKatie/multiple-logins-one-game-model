@@ -11,10 +11,12 @@ import org.hibernate.Transaction;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Properties;
 
+@Component
 public class GameDBRepository implements IGameDBRepository {
 
     private JdbcUtils dbUtils;
