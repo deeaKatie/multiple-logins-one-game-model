@@ -11,6 +11,7 @@ import org.hibernate.Transaction;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -23,6 +24,7 @@ public class GameDBRepository implements IGameDBRepository {
     private static final Logger logger= LogManager.getLogger();
     Session session;
 
+    @Autowired
     public GameDBRepository(Properties properties) {
         logger.info("Initializing GameRepo with properties {}",properties);
         dbUtils = new JdbcUtils(properties);
@@ -64,6 +66,13 @@ public class GameDBRepository implements IGameDBRepository {
         SQLQuery query = session.createSQLQuery("select * from game");
         query.addEntity(Game.class);
         List<Game> games = query.list();
+
+        System.out.println("GAMES");
+        for (var g : games) {
+            System.out.println(g);
+        }
+        System.out.println("END");
+
         return games;
     }
 }
