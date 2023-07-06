@@ -10,4 +10,8 @@ public interface IObserver {
     void sendToWaitingRoom();
 
     void roundFinished(RoundEndDTO round);
+
+    void gameFinished(String userStatus);
+
+
 }

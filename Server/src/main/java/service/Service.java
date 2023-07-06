@@ -26,7 +26,9 @@ public class Service implements IServices {
 
     private Map<Long, Card> currentRoundCards;
     private final int defaultThreadsNo = 5;
-   // private Map.Entry<Long, IObserver> client;
+    // private Map.Entry<Long, IObserver> client;
+
+    private Game game;
 
     public Service(IUserRepository userRepository, ICardDBRepository cardDBRepository) {
         this.userRepository = userRepository;
@@ -34,6 +36,7 @@ public class Service implements IServices {
         this.loggedClients = new ConcurrentHashMap<>();
         this.playingClients = new ConcurrentHashMap<>();
         this.currentRoundCards = new ConcurrentHashMap<>();
+        game = new Game();
     }
 
     @Override
@@ -67,7 +70,12 @@ public class Service implements IServices {
 
     @Override
     public synchronized void logout(User user) throws ServiceException {
-        loggedClients.remove(user.getId());
+        if (loggedClients.containsKey(user.getId())) {
+            loggedClients.remove(user.getId());
+        } else if (playingClients.containsKey(user.getId())) {
+            noMoreCards(user);
+            loggedClients.remove(user.getId());
+        }
     }
 
     @Override
@@ -99,6 +107,7 @@ public class Service implements IServices {
                 client.gameStarted(players);
 
             }
+            this.game = game;
             loggedClients.clear();
         }
     }
@@ -122,7 +131,7 @@ public class Service implements IServices {
 
             int noOfCards = 0;
 
-            while(noOfCards < 4) {
+            while (noOfCards < 4) {
                 noOfCards++;
                 Random rand = new Random();
                 int randomCardIndex = rand.nextInt(8);
@@ -157,11 +166,9 @@ public class Service implements IServices {
         for (var user_card : currentRoundCards.entrySet()) {
             if (Objects.equals(user_card.getValue().getValue(), winnerCard.getValue())) {
                 noOfWinnerCards++;
-                System.out.println("card: " + user_card.getValue().getValue()  + " nr: " + noOfWinnerCards);
+                System.out.println("card: " + user_card.getValue().getValue() + " nr: " + noOfWinnerCards);
             }
         }
-
-
 
         RoundEndDTO round = new RoundEndDTO(playedCards, roundWinner);
 
@@ -209,7 +216,41 @@ public class Service implements IServices {
     }
 
     @Override
-    public void noMoreCards(User loggedUser) throws ServiceException {
+    public boolean noMoreCards(User loggedUser) throws ServiceException {
+        // remove from playing, put to waiting
+        loggedClients.put(loggedUser.getId(), playingClients.get(loggedUser.getId()));
+        var clientId = loggedUser.getId();
+        playingClients.remove(loggedUser.getId());
+
+        // if only one player, then game end
+        if (playingClients.size() == 1) {
+
+            // waiting room peeps
+            System.out.println("LC");
+            loggedClients.entrySet().forEach(System.out::println);
+            for (var client : loggedClients.entrySet()) {
+                if (client.getKey() != clientId) {
+                    client.getValue().gameFinished("");
+                }
+            }
+
+            // send winner, won message
+            for (var client : playingClients.entrySet()) {
+                client.getValue().gameFinished("won");
+                loggedClients.put(client.getKey(), client.getValue());
+            }
+
+            playingClients.clear();
+
+            System.out.println("SERVICE-> game finished");
+            return true; // game finished
+        }
+        System.out.println("SERVICE-> game still going");
+        return false; // game is still going go to waiting
+    }
+
+    @Override
+    public void sendWinnerCards(Deck deck) throws ServiceException {
 
     }
 }

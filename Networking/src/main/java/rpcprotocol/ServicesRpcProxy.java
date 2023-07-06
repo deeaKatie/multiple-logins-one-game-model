@@ -4,6 +4,7 @@ import dto.PlayersDTO;
 import dto.RoundEndDTO;
 import dto.UserMoveDTO;
 import model.Card;
+import model.Deck;
 import model.User;
 import services.IObserver;
 import services.IServices;
@@ -13,6 +14,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.sql.SQLOutput;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -54,7 +56,7 @@ public class ServicesRpcProxy implements IServices {
             this.closeConnection();
             throw new ServiceException(err);
         } else if (response.type() == ResponseType.WAITING_ROOM) {
-
+            this.client = client;
             client.sendToWaitingRoom();
             loggedUser = (User) response.data();
             return loggedUser;
@@ -139,9 +141,14 @@ public class ServicesRpcProxy implements IServices {
         if (response.type() == ResponseType.ROUND_END) {
             client.roundFinished((RoundEndDTO) response.data());
         }
+        if (response.type() == ResponseType.GAME_FINISHED) {
+            System.out.println("PROXY UPDATE -> GAME_FINIHSED");
+            client.gameFinished((String) response.data());
+        }
     }
     private boolean isUpdate(Response response) {
         return response.type() == ResponseType.GAME_STARTED ||
+                response.type() == ResponseType.GAME_FINISHED ||
                 response.type() == ResponseType.ROUND_END;
     }
     private void sendRequest(Request request) throws ServiceException {
@@ -217,7 +224,7 @@ public class ServicesRpcProxy implements IServices {
     }
 
     @Override
-    public void noMoreCards(User loggedUser) throws ServiceException {
+    public boolean noMoreCards(User loggedUser) throws ServiceException {
         Request req =(new Request.Builder()).type(RequestType.NO_MORE_CARDS).data(loggedUser).build();
         sendRequest(req);
         Response response = readResponse();
@@ -227,7 +234,26 @@ public class ServicesRpcProxy implements IServices {
         } else if (response.type() == ResponseType.OK) {
             System.out.println("PROXY -> OK RESPONSE");
             // move user to waiting screen
-            client.sendToWaitingRoom();
+            //client.sendToWaitingRoom();
+            System.out.println("PROXY-> game still going");
+            return false;
+        } else if (response.type() == ResponseType.G_FINISHED) {
+            System.out.println("PROXY-> game finished");
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void sendWinnerCards(Deck deck) throws ServiceException {
+        Request req =(new Request.Builder()).type(RequestType.WINNER_CARDS).data(deck).build();
+        sendRequest(req);
+        Response response = readResponse();
+
+        if (response.type() == ResponseType.ERROR) {
+            throw new ServiceException(response.data().toString());
+        } else if (response.type() == ResponseType.OK) {
+            System.out.println("PROXY -> OK RESPONSE");
         }
     }
 }

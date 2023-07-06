@@ -7,18 +7,24 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import model.Card;
+import model.Deck;
 import model.User;
 import services.IObserver;
 import services.IServices;
 import services.ServiceException;
 import utils.MessageAlert;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Objects;
 
 
@@ -97,7 +103,7 @@ public class PlayController implements IObserver {
     }
 
     @FXML
-    public void logOutHandler() {
+    public void logOutHandler() throws IOException {
         System.out.println("Logging out!\n");
         try {
             service.logout(loggedUser);
@@ -105,6 +111,14 @@ public class PlayController implements IObserver {
             MessageAlert.showMessage(null, Alert.AlertType.ERROR,"Error logging out", ex.getMessage());
         }
 
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/LogInView.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+
+        Stage stage = (Stage) logOutButton.getScene().getWindow();
+        LogInController logCtrl = fxmlLoader.getController();
+
+        logCtrl.setService(service);
+        stage.setScene(scene);
     }
 
     @Override
@@ -127,8 +141,31 @@ public class PlayController implements IObserver {
     public void sendToWaitingRoom() {
         sentToWaiting = true;
         init_WaitScreen();
+
     }
 
+    @Override
+    public void gameFinished(String userStatus) {
+        Platform.runLater(() -> {
+            sentToWaiting = false;
+            init_StartScreen();
+            if (userStatus == "won") {
+                gameStatusLabel.setText("You won the game!");
+                gameStatusLabel.setVisible(true);
+
+                Deck deck = new Deck();
+                for(var c : modelCards) {
+                    deck.addCard(c);
+                }
+                try {
+                    service.sendWinnerCards(deck);
+                } catch (Exception e) {
+                    MessageAlert.showMessage(null, Alert.AlertType.ERROR,"Error logging out", e.getMessage());
+                }
+            }
+        });
+
+    }
 
     public void sendSelectedCard(Card card) {
         try {
@@ -180,7 +217,12 @@ public class PlayController implements IObserver {
             // ran out of cards
             if (modelCards.isEmpty()) {
                 try {
-                    service.noMoreCards(loggedUser);
+                    boolean status = service.noMoreCards(loggedUser);
+                    if (status) { // game ended
+                        gameFinished("");
+                    } else { // game still going go to waiting room
+                        sendToWaitingRoom();
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

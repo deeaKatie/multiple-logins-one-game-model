@@ -2,6 +2,7 @@ package services;
 
 import dto.UserMoveDTO;
 import model.Card;
+import model.Deck;
 import model.User;
 
 public interface IServices {
@@ -17,5 +18,7 @@ public interface IServices {
 
     void cardSelected(UserMoveDTO move) throws ServiceException;
 
-    void noMoreCards(User loggedUser) throws ServiceException;
+    boolean noMoreCards(User loggedUser) throws ServiceException;
+
+    void sendWinnerCards(Deck deck) throws ServiceException;
 }

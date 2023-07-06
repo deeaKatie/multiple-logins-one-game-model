@@ -4,6 +4,7 @@ import dto.PlayersDTO;
 import dto.RoundEndDTO;
 import dto.UserMoveDTO;
 import model.Card;
+import model.Deck;
 import model.User;
 import services.IObserver;
 import services.IServices;
@@ -123,7 +124,8 @@ public class ClientRpcReflectionWorker implements Runnable, IObserver {
         try {
             this.service.logout(user);
             this.connected = false;
-            return okResponse;
+            System.out.println("WORKER -> log out");
+            return (new Response.Builder()).type(ResponseType.OK).build();
         } catch (ServiceException ex) {
             return (new Response.Builder()).type(ResponseType.ERROR).data(ex.getMessage()).build();
         }
@@ -155,9 +157,23 @@ public class ClientRpcReflectionWorker implements Runnable, IObserver {
     private Response handleNO_MORE_CARDS(Request request) {
         System.out.println("WORKER -> handleSELECTED_CARD");
         try {
-            service.cardSelected((UserMoveDTO) request.data());
-            System.out.println("WORKER -> sending ok response");
-            return okResponse;
+            boolean status = service.noMoreCards((User) request.data());
+            if (status) { // game ended
+                return (new Response.Builder().type(ResponseType.G_FINISHED)).build();
+            } else {
+                System.out.println("WORKER -> sending ok response");
+                return okResponse;
+            }
+        } catch (ServiceException ex) {
+            return (new Response.Builder().type(ResponseType.ERROR)).data(ex.getMessage()).build();
+        }
+    }
+
+    private Response handleWINNER_CARDS(Request request) {
+        System.out.println("WORKER -> handleWINNER_CARDS");
+        try {
+            service.sendWinnerCards((Deck) request.data());
+            return (new Response.Builder().type(ResponseType.OK)).build();
         } catch (ServiceException ex) {
             return (new Response.Builder().type(ResponseType.ERROR)).data(ex.getMessage()).build();
         }
@@ -192,6 +208,16 @@ public class ClientRpcReflectionWorker implements Runnable, IObserver {
             sendResponse(response);
         } catch (Exception ex) {
             System.out.println("Error tryning to send user to round result response");
+        }
+    }
+
+    @Override
+    public void gameFinished(String userStatus) {
+        Response response = (new Response.Builder()).type((ResponseType.GAME_FINISHED)).data(userStatus).build();
+        try {
+            sendResponse(response);
+        } catch (Exception ex) {
+            System.out.println("Error tryning to send user game finished response");
         }
     }
 }

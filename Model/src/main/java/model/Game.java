@@ -12,6 +12,7 @@ public class Game implements HasId<Long> {
     @OneToMany//(fetch = FetchType.EAGER)
     @MapKeyJoinColumn(name = "user_id")
     private Map<model.User, Deck> players;
+
     //@OneToMany
     //@MapKeyJoinColumn(name = "user_id")
     //private Map<model.User, Deck> winners;
