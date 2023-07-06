@@ -14,11 +14,16 @@ public class Game implements HasId<Long> {
     @GenericGenerator(name = "increment", strategy = "increment")
     private Long id;
     @OneToMany//(fetch = FetchType.EAGER)
-    @MapKeyJoinColumn(name = "user_id")
-    private Map<model.User, Deck> players;
-
+    @JoinTable(name = "players",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "id"))
+    @MapKeyJoinColumn(name = "user_deck1")
+    private Map<User, Deck> players;
     @OneToMany
-    @MapKeyJoinColumn(name = "user_id")
+    @JoinTable(name = "winners",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "id"))
+    @MapKeyJoinColumn(name = "user_deck2")
     private Map<model.User, Deck> winners;
 
     public Game() {
@@ -67,7 +72,7 @@ public class Game implements HasId<Long> {
         return "Game{" +
                 "id=" + id +
                 ", players=" + out +
-              //  ", winners=" + winners +
+                ", winners=" + winners +
                 '}';
     }
 }

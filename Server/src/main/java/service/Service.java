@@ -265,7 +265,18 @@ public class Service implements IServices {
         System.out.println("SERVICE -> Send winner cards");
         Deck winnerDeck = data.getWinnerDeck();
         deckDBRepository.add(winnerDeck);
+
+        System.out.println("User: " + data.getWinner());
+        System.out.println("DECK: " + winnerDeck);
         game.addWinner(data.getWinner(), winnerDeck);
+        System.out.println("WINNERS");
+//        for (var g : game.getWinners().entrySet()) {
+//            System.out.println(g);
+//        }
+        System.out.println("END");
+
+        System.out.println("SERVICE -> THE GAME: " + game);
+
         gameDBRepository.add(game);
         System.out.println("SERVICE -> Game saved to DB!\n");
 

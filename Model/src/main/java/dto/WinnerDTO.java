@@ -15,8 +15,6 @@ public class WinnerDTO implements HasId<Long> {
     }
 
     public WinnerDTO(User winner, Deck winnerDeck) {
-        winner = new User();
-        winnerDeck = new Deck();
         this.winner = winner;
         this.winnerDeck = winnerDeck;
     }

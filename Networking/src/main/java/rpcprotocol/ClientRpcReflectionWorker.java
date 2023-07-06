@@ -173,6 +173,8 @@ public class ClientRpcReflectionWorker implements Runnable, IObserver {
     private Response handleWINNER_CARDS(Request request) {
         System.out.println("WORKER -> handleWINNER_CARDS");
         try {
+            System.out.println("User: " + ((WinnerDTO)request.data()).getWinner());
+            System.out.println("Deck: " + ((WinnerDTO)request.data()).getWinnerDeck());
             service.sendWinnerCards((WinnerDTO) request.data());
             return (new Response.Builder().type(ResponseType.OK)).build();
         } catch (ServiceException ex) {

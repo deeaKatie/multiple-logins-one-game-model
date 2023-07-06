@@ -161,6 +161,8 @@ public class PlayController implements IObserver {
                 }
                 try {
                     System.out.println("CTRL -> Send winner cards");
+                    System.out.println("User: " + loggedUser);
+                    System.out.println("Deck: " + deck);
                     WinnerDTO data = new WinnerDTO(loggedUser, deck);
                     service.sendWinnerCards(data);
                 } catch (Exception e) {
