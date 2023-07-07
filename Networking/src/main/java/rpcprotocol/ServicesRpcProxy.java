@@ -2,10 +2,7 @@ package rpcprotocol;
 
 import dto.PlayersDTO;
 import dto.RoundEndDTO;
-import dto.UserMoveDTO;
 import dto.WinnerDTO;
-import model.Card;
-import model.Deck;
 import model.User;
 import services.IObserver;
 import services.IServices;
@@ -15,7 +12,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.sql.SQLOutput;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -56,11 +52,6 @@ public class ServicesRpcProxy implements IServices {
             String err = response.data().toString();
             this.closeConnection();
             throw new ServiceException(err);
-        } else if (response.type() == ResponseType.WAITING_ROOM) {
-            this.client = client;
-            client.sendToWaitingRoom();
-            loggedUser = (User) response.data();
-            return loggedUser;
         }
         return null;
     }
@@ -75,25 +66,6 @@ public class ServicesRpcProxy implements IServices {
             String err = response.data().toString();
             throw new ServiceException(err);
         }
-    }
-
-    @Override
-    public void startGame(Long user_id) throws ServiceException {
-        System.out.println("PROXY -> startGame");
-        Request req =(new Request.Builder()).type(RequestType.START_GAME).data(user_id).build();
-        sendRequest(req);
-        System.out.println("PROXY -> trying to read response");
-        Response response = readResponse();
-        System.out.println("PROXY -> read response");
-
-        if (response.type() == ResponseType.ERROR) {
-            throw new ServiceException(response.data().toString());
-        } else if (response.type() == ResponseType.OK) {
-            System.out.println("PROXY -> OK REASPONSE");
-            //client.gameStarted((PlayersDTO) response.data());
-        }
-
-        System.out.println("PROXY -> i suck");
     }
 
     private void initializeConnection() throws ServiceException {
@@ -129,28 +101,12 @@ public class ServicesRpcProxy implements IServices {
     private void handleUpdate(Response response) {
         System.out.println("PROXY -> handleUpdate");
         System.out.println("RESPONSE -> " + response);
-        if (response.type() == ResponseType.GAME_STARTED) {
-            try {
-                client.gameStarted((PlayersDTO) response.data());
-            } catch (ServiceException ex) {
-                ex.printStackTrace();
-            }
-        }
-        if (response.type() == ResponseType.WAITING_ROOM) {
-            client.sendToWaitingRoom();
-        }
-        if (response.type() == ResponseType.ROUND_END) {
-            client.roundFinished((RoundEndDTO) response.data());
-        }
         if (response.type() == ResponseType.GAME_FINISHED) {
-            System.out.println("PROXY UPDATE -> GAME_FINIHSED");
-            client.gameFinished((String) response.data());
+//            client.sendToWaitingRoom();
         }
     }
     private boolean isUpdate(Response response) {
-        return response.type() == ResponseType.GAME_STARTED ||
-                response.type() == ResponseType.GAME_FINISHED ||
-                response.type() == ResponseType.ROUND_END;
+        return response.type() == ResponseType.GAME_FINISHED;
     }
     private void sendRequest(Request request) throws ServiceException {
         try {
@@ -205,59 +161,4 @@ public class ServicesRpcProxy implements IServices {
         }
     }
 
-    @Override
-    public String checkGameState() {
-        return null;
-    }
-
-
-    @Override
-    public void cardSelected(UserMoveDTO move) throws ServiceException {
-        Request req =(new Request.Builder()).type(RequestType.SELECTED_CARD).data(move).build();
-        sendRequest(req);
-        Response response = readResponse();
-
-        if (response.type() == ResponseType.ERROR) {
-            throw new ServiceException(response.data().toString());
-        } else if (response.type() == ResponseType.OK) {
-            System.out.println("PROXY -> OK RESPONSE");
-        }
-    }
-
-    @Override
-    public boolean noMoreCards(User loggedUser) throws ServiceException {
-        Request req =(new Request.Builder()).type(RequestType.NO_MORE_CARDS).data(loggedUser).build();
-        sendRequest(req);
-        Response response = readResponse();
-
-        if (response.type() == ResponseType.ERROR) {
-            throw new ServiceException(response.data().toString());
-        } else if (response.type() == ResponseType.OK) {
-            System.out.println("PROXY -> OK RESPONSE");
-            // move user to waiting screen
-            //client.sendToWaitingRoom();
-            System.out.println("PROXY-> game still going");
-            return false;
-        } else if (response.type() == ResponseType.G_FINISHED) {
-            System.out.println("PROXY-> game finished");
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public void sendWinnerCards(WinnerDTO data) throws ServiceException {
-        System.out.println("PROXY -> Send winner cards");
-        System.out.println("User: " + data.getWinner());
-        System.out.println("Deck: " + data.getWinnerDeck());
-        Request req =(new Request.Builder()).type(RequestType.WINNER_CARDS).data(data).build();
-        sendRequest(req);
-        Response response = readResponse();
-
-        if (response.type() == ResponseType.ERROR) {
-            throw new ServiceException(response.data().toString());
-        } else if (response.type() == ResponseType.OK) {
-            System.out.println("PROXY -> OK RESPONSE");
-        }
-    }
 }

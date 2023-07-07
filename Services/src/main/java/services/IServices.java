@@ -13,13 +13,4 @@ public interface IServices {
     //void addReservation(Reservation reservation) throws ServiceException;
     void logout(User user) throws ServiceException;
 
-    void startGame(Long user_id) throws ServiceException;
-
-    String checkGameState();
-
-    void cardSelected(UserMoveDTO move) throws ServiceException;
-
-    boolean noMoreCards(User loggedUser) throws ServiceException;
-
-    void sendWinnerCards(WinnerDTO data) throws ServiceException;
 }
