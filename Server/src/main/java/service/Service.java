@@ -1,14 +1,7 @@
 package service;
 
-import dto.PlayersDTO;
-import dto.WinnerDTO;
 import exception.RepositoryException;
-import model.Card;
-import model.Deck;
-import model.Game;
 import model.User;
-import repository.ICardDBRepository;
-import repository.IDeckDBRepository;
 import repository.IGameDBRepository;
 import repository.IUserRepository;
 import services.IObserver;
