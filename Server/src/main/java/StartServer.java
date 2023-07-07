@@ -27,11 +27,9 @@ public class StartServer {
         }
 
         IUserRepository userRepository = new UserDBRepository(serverProps);
-        ICardDBRepository cardDBRepository = new CardDBRepository(serverProps);
         IGameDBRepository gameDBRepository = new GameDBRepository(serverProps);
-        IDeckDBRepository deckDBRepository = new DeckDBRepository(serverProps);
 
-        IServices service=new Service(userRepository, cardDBRepository, gameDBRepository, deckDBRepository);
+        IServices service=new Service(userRepository, gameDBRepository);
 
         int serverPort = defaultPort;
         try {
