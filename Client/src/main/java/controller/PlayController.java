@@ -46,10 +46,10 @@ public class PlayController implements IObserver {
     }
     public void setUser(User user) {
         this.loggedUser = user;
-        usernameLabel.setText("Hi, " + loggedUser.getUsername());
     }
     public void initVisuals() {
-
+        usernameLabel.setText("Hi, " + loggedUser.getUsername());
+        gameStatusLabel.setVisible(false);
     }
     @FXML
     public void logOutHandler() throws IOException {

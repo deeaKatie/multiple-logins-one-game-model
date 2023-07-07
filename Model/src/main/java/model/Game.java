@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Entity
-@Table(name = "game")
+@Table(name = "games")
 public class Game implements HasId<Long> {
     @Id
     @GeneratedValue(generator = "increment")

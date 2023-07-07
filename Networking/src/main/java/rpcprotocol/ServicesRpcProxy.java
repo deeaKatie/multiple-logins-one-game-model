@@ -98,12 +98,13 @@ public class ServicesRpcProxy implements IServices {
     private void handleUpdate(Response response) {
         System.out.println("PROXY -> handleUpdate");
         System.out.println("RESPONSE -> " + response);
-        if (response.type() == ResponseType.GAME_FINISHED) {
-//            client.sendToWaitingRoom();
-        }
+//        if (response.type() == ResponseType.GAME_FINISHED) {
+//            //smth
+//        }
     }
     private boolean isUpdate(Response response) {
-        return response.type() == ResponseType.GAME_FINISHED;
+        //return response.type() == ResponseType.GAME_FINISHED;
+        return false;
     }
     private void sendRequest(Request request) throws ServiceException {
         try {

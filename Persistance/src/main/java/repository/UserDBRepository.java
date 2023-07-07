@@ -12,6 +12,7 @@ import org.hibernate.Transaction;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.query.Query;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -71,25 +72,21 @@ public class UserDBRepository implements IUserRepository{
 
     @Override
     public Iterable<User> getAll() {
-        SQLQuery query = session.createSQLQuery("select * from user");
+        SQLQuery query = session.createSQLQuery("select * from users");
         query.addEntity(User.class);
         List<User> users = query.list();
         return users;
     }
 
-    private User parseUser(ResultSet rs) throws SQLException {
-        Long id = rs.getLong("cod_u");
-        String username = rs.getString("username");
-        String password = rs.getString("password");
-        User user = new User(username, password);
-        user.setId(id);
-        System.out.println(user);
-        return user;
-    }
-
     @Override
     public User findUserByUsername(String username) throws RepositoryException {
-        //todo implement the boy
-        return null;
+        Query query = session.createQuery("from User where username = :u");
+        query.setParameter("u", username);
+        User user = (User) query.uniqueResult();
+
+        if (user == null) {
+            throw new RepositoryException("No user found!");
+        }
+        return user;
     }
 }
