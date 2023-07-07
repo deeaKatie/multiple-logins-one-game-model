@@ -5,11 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ccfa7e6b-654c-463b-a268-93519fa570db" name="Changes" comment="save game to DB fixed">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/fb7c0800-3c56-4df8-88f3-ab12b50eb5f7.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/fb7c0800-3c56-4df8-88f3-ab12b50eb5f7.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Persistance/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/Persistance/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Persistance/src/main/java/repository/GameDBRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Persistance/src/main/java/repository/GameDBRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RESTServices/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/RESTServices/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RESTServices/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/RESTServices/src/main/java/rest/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -206,6 +203,13 @@
       <ForceTestExec>false</ForceTestExec>
       <method v="2" />
     </configuration>
+    <configuration name="Main" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="rezolvare_razboi.RESTServices.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="rest.Main" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.rezolvare_razboi:Client [run]" />
@@ -229,6 +233,7 @@
       <workItem from="1687178630668" duration="18579000" />
       <workItem from="1688571902403" duration="14263000" />
       <workItem from="1688663280065" duration="5500000" />
+      <workItem from="1688726907524" duration="435000" />
     </task>
     <task id="LOCAL-00001" summary="first working version, w/ log in &amp; showing users">
       <created>1688574514383</created>
