@@ -20,14 +20,11 @@ import java.util.Properties;
 @Component
 public class GameDBRepository implements IGameDBRepository {
 
-    private JdbcUtils dbUtils;
     private static final Logger logger= LogManager.getLogger();
-    Session session;
+    private Session session;
 
     @Autowired
-    public GameDBRepository(Properties properties) {
-        logger.info("Initializing GameRepo with properties {}",properties);
-        dbUtils = new JdbcUtils(properties);
+    public GameDBRepository() {
 
         StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
         SessionFactory factory = new MetadataSources(registry).buildMetadata().buildSessionFactory();

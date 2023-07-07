@@ -1,11 +1,5 @@
 package rpcprotocol;
 
-import dto.PlayersDTO;
-import dto.RoundEndDTO;
-import dto.UserMoveDTO;
-import dto.WinnerDTO;
-import model.Card;
-import model.Deck;
 import model.User;
 import services.IObserver;
 import services.IServices;
@@ -17,7 +11,6 @@ import java.io.ObjectOutputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.Socket;
-import java.util.Objects;
 
 public class ClientRpcReflectionWorker implements Runnable, IObserver {
     private IServices service;

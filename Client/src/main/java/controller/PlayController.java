@@ -1,10 +1,5 @@
 package controller;
 
-import dto.PlayersDTO;
-import dto.RoundEndDTO;
-import dto.UserMoveDTO;
-import dto.WinnerDTO;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -14,10 +9,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import model.Card;
-import model.Deck;
 import model.User;
 import services.IObserver;
 import services.IServices;
@@ -25,8 +17,6 @@ import services.ServiceException;
 import utils.MessageAlert;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Objects;
 
 
 public class PlayController implements IObserver {

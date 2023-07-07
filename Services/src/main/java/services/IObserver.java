@@ -1,8 +1,5 @@
 package services;
 
-import dto.PlayersDTO;
-import dto.RoundEndDTO;
-
 public interface IObserver {
 //    void gameStarted(PlayersDTO players) throws ServiceException;
 //
@@ -11,5 +8,4 @@ public interface IObserver {
 //    void roundFinished(RoundEndDTO round);
 //
 //    void gameFinished(String userStatus);
-
 }

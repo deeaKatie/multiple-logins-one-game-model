@@ -1,8 +1,5 @@
 package rpcprotocol;
 
-import dto.PlayersDTO;
-import dto.RoundEndDTO;
-import dto.WinnerDTO;
 import model.User;
 import services.IObserver;
 import services.IServices;

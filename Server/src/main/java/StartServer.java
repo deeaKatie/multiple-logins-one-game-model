@@ -16,6 +16,8 @@ public class StartServer {
 
     public static void main(String[] args) {
 
+
+        //todo get rid of this if you want
         Properties serverProps=new Properties();
         try {
             serverProps.load(StartServer.class.getResourceAsStream("server.properties"));
@@ -26,8 +28,8 @@ public class StartServer {
             return;
         }
 
-        IUserRepository userRepository = new UserDBRepository(serverProps);
-        IGameDBRepository gameDBRepository = new GameDBRepository(serverProps);
+        IUserRepository userRepository = new UserDBRepository();
+        IGameDBRepository gameDBRepository = new GameDBRepository();
 
         IServices service=new Service(userRepository, gameDBRepository);
 
