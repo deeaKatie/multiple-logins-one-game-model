@@ -78,7 +78,7 @@ public class Service implements IServices {
         return listItemsDTO;
     }
 
-    public synchronized void madeAction(ActionDTO action) {
+    public synchronized void madeAction(ActionDTO action) throws ServiceException {
         System.out.println("SERVER -> madeAction");
 
         // Do smth for action
