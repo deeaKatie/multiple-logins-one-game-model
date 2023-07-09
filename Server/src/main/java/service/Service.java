@@ -20,8 +20,8 @@ public class Service implements IServices {
     private IUserRepository userRepository;
     private IGameDBRepository gameDBRepository;
     private Map<Long, IObserver> loggedClients; // all logged clients
-    private Map<Long, StartGameDTO> waitingClients; // just clients waiting to be matched
-    private Map<Long, Long> playingClients; // client id and game id
+    private Map<Long, IObserver> playingClients;
+    private Game onGoingGame; // only one game at a time
     private int noOfPlayersInAGame;
     private final int defaultThreadsNo = 5;
 
@@ -29,9 +29,9 @@ public class Service implements IServices {
         this.userRepository = userRepository;
         this.gameDBRepository = gameDBRepository;
         this.loggedClients = new ConcurrentHashMap<>();
-        this.waitingClients = new ConcurrentHashMap<>();
         this.playingClients = new ConcurrentHashMap<>();
         noOfPlayersInAGame = 2;
+        onGoingGame = new Game();
     }
 
     public synchronized User checkLogIn(User user, IObserver client) throws ServiceException {
@@ -67,28 +67,29 @@ public class Service implements IServices {
         } else{
             throw new ServiceException("User not logged in");
         }
+
     }
 
     @Override
     public Boolean startGame(StartGameDTO startGameDTO) throws ServiceException {
         System.out.println("SERVER -> startGame");
+
+        // if game not already going
         // if we have enough waiting clients to start
-        System.out.println("SERVER -> waitingClients.size() = " + waitingClients.size());
-        if (waitingClients.size() >= noOfPlayersInAGame - 1) { // we have enough to start a match
+        System.out.println("SERVER -> waitingClients.size() = " + loggedClients.size());
+        if (playingClients.isEmpty() && loggedClients.size() >= noOfPlayersInAGame - 1) { // we have enough to start a match
             System.out.println("SERVER -> We have players to start a match");
 
             // get first noOfPlayersInAGame clients
             List<Long> clientsForThisGame = new ArrayList<>();
-            for (var client : waitingClients.entrySet()) {
+            for (var client : loggedClients.entrySet()) {
                 clientsForThisGame.add(client.getKey());
-                if (clientsForThisGame.size() == noOfPlayersInAGame) {
-                    break;
-                }
             }
 
             // create game
             Game game = new Game();
             game = gameDBRepository.add(game);
+            onGoingGame = game;
 
             // add clients to game & remove them from waiting list
             game.addPlayer(startGameDTO.getUser());
@@ -98,8 +99,7 @@ public class Service implements IServices {
                 } catch (RepositoryException e) {
                     e.printStackTrace();
                 }
-                waitingClients.remove(clientId);
-                playingClients.put(clientId, game.getId());
+                playingClients.put(clientId, loggedClients.get(clientId));
             }
 
             // notify clients
@@ -119,8 +119,6 @@ public class Service implements IServices {
         }
 
         // we don't have enough clients to start a match
-        // add client to waiting list
-        waitingClients.put(startGameDTO.getUser().getId(), startGameDTO);
         return false;
 
     }
@@ -186,6 +184,21 @@ public class Service implements IServices {
                         // LOSER
                         loggedClients.get(player.getKey()).gameEndedLost(gameDTO);
                     }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+        }
+
+        //notify all logged clients
+        for (var player : loggedClients.entrySet()) {
+            executor.execute(() -> {
+                try {
+                    //notify just waiting room
+                    //if (!playingClients.containsKey(player.getKey())) {
+                        // Start game
+                        player.getValue().goStartScreen();
+                    //}
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

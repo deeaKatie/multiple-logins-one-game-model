@@ -7,7 +7,8 @@ public enum ResponseType {
     GAME_STARTED,
     GO_WAITING,
     GAME_END_WIN,
-    GAME_END_LOSE;
+    GAME_END_LOSE,
+    GO_START_SCREEN;
     private ResponseType() {
     }
 }

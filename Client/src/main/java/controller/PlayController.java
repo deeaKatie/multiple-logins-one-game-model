@@ -121,6 +121,14 @@ public class PlayController implements IObserver {
         stage.setScene(scene);
     }
 
+
+    @Override
+    public void goStartScreen() {
+        Platform.runLater(() -> {
+            init_StartScreen();
+        });
+    }
+
     @Override
     public void update(UpdateDTO updateDTO) {
         initModel(updateDTO.getEntities());

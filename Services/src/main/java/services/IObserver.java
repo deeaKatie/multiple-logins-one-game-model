@@ -13,6 +13,8 @@ public interface IObserver {
 
     void gameEndedWon(GameDTO data);
 
+    void goStartScreen();
+
 //    void gameStarted(PlayersDTO players) throws ServiceException;
 //
 //    void sendToWaitingRoom();

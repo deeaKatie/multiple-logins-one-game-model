@@ -196,5 +196,14 @@ public class ClientRpcReflectionWorker implements Runnable, IObserver {
         }
     }
 
-
+    @Override
+    public void goStartScreen() {
+        System.out.println("WORKER -> Sending GO_START_SCREEN");
+        try {
+            Response response = new Response.Builder().type(ResponseType.GO_START_SCREEN).build();
+            sendResponse(response);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

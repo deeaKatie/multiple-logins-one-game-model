@@ -121,7 +121,8 @@ public class ServicesRpcProxy implements IServices {
         return response.type() == ResponseType.UPDATE_DATA ||
                 response.type() == ResponseType.GAME_STARTED ||
                 response.type() == ResponseType.GAME_END_LOSE ||
-                response.type() == ResponseType.GAME_END_WIN;
+                response.type() == ResponseType.GAME_END_WIN ||
+                response.type() == ResponseType.GO_START_SCREEN;
     }
 
     private void handleUpdate(Response response) {
@@ -142,6 +143,10 @@ public class ServicesRpcProxy implements IServices {
 
         else if (response.type() == ResponseType.GAME_END_WIN) {
             client.gameEndedLost((GameDTO) response.data());
+        }
+
+        else if (response.type() == ResponseType.GO_START_SCREEN) {
+            client.goStartScreen();
         }
     }
 
