@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ccfa7e6b-654c-463b-a268-93519fa570db" name="Changes" comment="start and end game">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/java/service/Service.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/service/Service.java" afterDir="false" />
-    </list>
+    <list default="true" id="ccfa7e6b-654c-463b-a268-93519fa570db" name="Changes" comment="start and end game" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -33,42 +30,6 @@
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="rezolvare_razboi" type="f1a62948:ProjectNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="rezolvare_razboi" type="f1a62948:ProjectNode" />
-                <item name="Client" type="2d1252cf:ModuleNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="rezolvare_razboi" type="f1a62948:ProjectNode" />
-                <item name="Client" type="2d1252cf:ModuleNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="rezolvare_razboi" type="f1a62948:ProjectNode" />
-                <item name="Client" type="2d1252cf:ModuleNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="application" type="c8890929:TasksNode$1" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="rezolvare_razboi" type="f1a62948:ProjectNode" />
-                <item name="Server" type="2d1252cf:ModuleNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="rezolvare_razboi" type="f1a62948:ProjectNode" />
-                <item name="Server" type="2d1252cf:ModuleNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="rezolvare_razboi" type="f1a62948:ProjectNode" />
-                <item name="Server" type="2d1252cf:ModuleNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="application" type="c8890929:TasksNode$1" />
               </path>
             </expand>
             <select />
@@ -248,6 +209,7 @@
       <workItem from="1688847310299" duration="667000" />
       <workItem from="1688890043970" duration="12335000" />
       <workItem from="1688907644575" duration="11895000" />
+      <workItem from="1688932098911" duration="5000" />
     </task>
     <task id="LOCAL-00001" summary="first working version, w/ log in &amp; showing users">
       <created>1688574514383</created>
