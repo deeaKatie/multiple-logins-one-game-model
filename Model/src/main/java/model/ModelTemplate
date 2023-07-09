@@ -1,0 +1,21 @@
+@Entity
+public class Game implements HasId<Long> {
+    @Id
+    @GeneratedValue(generator = "increment")
+    @GenericGenerator(name = "increment", strategy = "increment")
+    private Long id;
+
+    @OneToOne
+    private CLASSTR1 entities1;
+
+    @OneToMany
+    private List<CLASSTR2> entities2;
+
+    @OneToMany //(fetch = FetchType.EAGER)
+    @JoinTable(name = "entities3", //name of join table
+                joinColumns = @JoinColumn(name = "id"), // param of left object
+                inverseJoinColumns = @JoinColumn(name = "id")) // param of right object
+    @MapKeyJoinColumn(name = "entities3_CLASSTR3_CLASSTR4") //name of join column in the join table
+    private Map<CLASSTR3, CLASSTR4> entities3;
+
+}

@@ -4,18 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ccfa7e6b-654c-463b-a268-93519fa570db" name="Changes" comment="working schelet with log in and log out">
-      <change afterPath="$PROJECT_DIR$/Persistance/src/main/java/repository/RepoTemplate" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/fb7c0800-3c56-4df8-88f3-ab12b50eb5f7.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/fb7c0800-3c56-4df8-88f3-ab12b50eb5f7.xml" afterDir="false" />
+    <list default="true" id="ccfa7e6b-654c-463b-a268-93519fa570db" name="Changes" comment="DB template &amp; logging">
+      <change afterPath="$PROJECT_DIR$/Model/src/main/java/model/ModelTemplate" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/Database.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Persistance/src/main/java/repository/GameDBRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Persistance/src/main/java/repository/GameDBRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Persistance/src/main/java/repository/IRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Persistance/src/main/java/repository/IRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Persistance/src/main/java/repository/UserDBRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Persistance/src/main/java/repository/UserDBRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/src/main/java/model/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/Model/src/main/java/model/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/src/main/java/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/Model/src/main/java/model/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Persistance/src/main/resources/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Persistance/src/main/resources/hibernate.cfg.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Persistance/src/main/resources/model/Games.hbm.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Persistance/src/main/resources/model/User.hbm.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/java/StartServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/StartServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/razboiDB.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RESTServices/src/main/resources/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/RESTServices/src/main/resources/hibernate.cfg.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/hibernateORM.db" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -247,7 +246,7 @@
       <workItem from="1688663280065" duration="5500000" />
       <workItem from="1688726907524" duration="8365000" />
       <workItem from="1688847310299" duration="667000" />
-      <workItem from="1688890043970" duration="1882000" />
+      <workItem from="1688890043970" duration="4126000" />
     </task>
     <task id="LOCAL-00001" summary="first working version, w/ log in &amp; showing users">
       <created>1688574514383</created>
@@ -316,7 +315,15 @@
       <option name="project" value="LOCAL" />
       <updated>1688737833746</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="DB template &amp; logging">
+      <option name="closed" value="true" />
+      <created>1688892156730</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1688892156730</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -342,6 +349,7 @@
     <MESSAGE value="first commit single login model - test" />
     <MESSAGE value="fxml cleared" />
     <MESSAGE value="working schelet with log in and log out" />
-    <option name="LAST_COMMIT_MESSAGE" value="working schelet with log in and log out" />
+    <MESSAGE value="DB template &amp; logging" />
+    <option name="LAST_COMMIT_MESSAGE" value="DB template &amp; logging" />
   </component>
 </project>

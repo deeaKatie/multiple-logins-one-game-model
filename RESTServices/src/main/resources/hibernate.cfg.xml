@@ -8,18 +8,16 @@
 
         <property name="dialect">dialect.SQLiteDialect</property>
         <property name="connection.driver_class">org.sqlite.JDBC</property>
-        <property name="connection.url">jdbc:sqlite:Server/hibernateORM.db</property>
-
+        <property name="connection.url">jdbc:sqlite:Server/Database.db</property>
         <property name="hibernate.hbm2ddl.auto">update</property>
 
         <!-- Echo all executed SQL to stdout -->
         <property name="show_sql">true</property>
         <property name="format_sql">true</property>
 
-
-        <mapping resource="model/User.hbm.xml"/>
-<!--        <mapping class="model.User"/>-->
-
+        <!-- Mapped objects -->
         <mapping class="model.Game"/>
+        <mapping class="model.User"/>
+
     </session-factory>
 </hibernate-configuration>

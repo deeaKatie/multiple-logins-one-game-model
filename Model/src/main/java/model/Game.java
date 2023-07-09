@@ -1,13 +1,9 @@
 package model;
 
 import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
-import java.util.HashMap;
-import java.util.Map;
 
 @Entity
-@Table(name = "games")
 public class Game implements HasId<Long> {
     @Id
     @GeneratedValue(generator = "increment")
