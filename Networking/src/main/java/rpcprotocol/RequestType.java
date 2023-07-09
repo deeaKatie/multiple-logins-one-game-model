@@ -4,7 +4,8 @@ public enum RequestType {
     LOGIN,
     LOGOUT,
     GET_DATA,
-    MADE_ACTION;
+    MADE_ACTION,
+    START_GAME;
     private RequestType() {
     }
 }

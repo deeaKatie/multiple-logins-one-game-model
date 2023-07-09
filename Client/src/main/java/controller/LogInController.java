@@ -45,7 +45,7 @@ public class LogInController {
 
             playCtrl.setService(service);
             playCtrl.setUser(user);
-            playCtrl.initVisuals();
+            playCtrl.init_StartScreen();
             stage.setScene(scene);
 
         }catch (ServiceException re){

@@ -1,8 +1,6 @@
 package rpcprotocol;
 
-import dto.ActionDTO;
-import dto.ListItemsDTO;
-import dto.UpdateDTO;
+import dto.*;
 import model.User;
 import services.IObserver;
 import services.IServices;
@@ -117,6 +115,20 @@ public class ClientRpcReflectionWorker implements Runnable, IObserver {
         }
     }
 
+    private Response handleSTART_GAME(Request request) {
+        System.out.println("WORKER ->" + request.type());
+
+        try {
+            Boolean status = service.startGame((StartGameDTO) request.data());
+            if (status) {
+                return (new Response.Builder()).type(ResponseType.OK).build();
+            }
+            return (new Response.Builder()).type(ResponseType.GO_WAITING).build();
+        } catch (ServiceException ex) {
+            return (new Response.Builder()).type(ResponseType.ERROR).data(ex.getMessage()).build();
+        }
+    }
+
     private Response handleGET_DATA(Request request) {
         System.out.println("WORKER ->" + request.type());
 
@@ -150,4 +162,39 @@ public class ClientRpcReflectionWorker implements Runnable, IObserver {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void gameStarted(GameDTO gameDTO) {
+        System.out.println("WORKER -> Sending GAME_STARTED");
+        Response response = new Response.Builder().type(ResponseType.GAME_STARTED).data(gameDTO).build();
+        try {
+            sendResponse(response);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void gameEndedWon(GameDTO gameDTO) {
+        System.out.println("WORKER -> Sending GAME_ENDED");
+        try {
+            Response response = new Response.Builder().type(ResponseType.GAME_END_WIN).data(gameDTO).build();
+            sendResponse(response);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void gameEndedLost(GameDTO gameDTO) {
+        System.out.println("WORKER -> Sending GAME_ENDED");
+        try {
+            Response response = new Response.Builder().type(ResponseType.GAME_END_LOSE).data(gameDTO).build();
+            sendResponse(response);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }

@@ -1,8 +1,6 @@
 package rpcprotocol;
 
-import dto.ActionDTO;
-import dto.ListItemsDTO;
-import dto.UpdateDTO;
+import dto.*;
 import model.User;
 import services.IObserver;
 import services.IServices;
@@ -119,15 +117,32 @@ public class ServicesRpcProxy implements IServices {
         }
     }
 
+    private boolean isUpdate(Response response) {
+        return response.type() == ResponseType.UPDATE_DATA ||
+                response.type() == ResponseType.GAME_STARTED ||
+                response.type() == ResponseType.GAME_END_LOSE ||
+                response.type() == ResponseType.GAME_END_WIN;
+    }
+
     private void handleUpdate(Response response) {
         System.out.println("PROXY -> handleUpdate");
         System.out.println("RESPONSE -> " + response);
+
         if (response.type() == ResponseType.UPDATE_DATA) {
             client.update((UpdateDTO) response.data());
         }
-    }
-    private boolean isUpdate(Response response) {
-        return response.type() == ResponseType.UPDATE_DATA;
+
+        else if (response.type() == ResponseType.GAME_STARTED) {
+            client.gameStarted((GameDTO) response.data());
+        }
+
+        else if (response.type() == ResponseType.GAME_END_LOSE) {
+            client.gameEndedWon((GameDTO) response.data());
+        }
+
+        else if (response.type() == ResponseType.GAME_END_WIN) {
+            client.gameEndedLost((GameDTO) response.data());
+        }
     }
 
     @Override
@@ -167,6 +182,25 @@ public class ServicesRpcProxy implements IServices {
             String err = response.data().toString();
             throw new ServiceException(err);
         }
+    }
+
+    @Override
+    public Boolean startGame(StartGameDTO startGameDTO) throws ServiceException {
+        System.out.println("PROXY -> getData");
+        Request req = (new Request.Builder()).type(RequestType.START_GAME).data(startGameDTO).build();
+        sendRequest(req);
+        Response response = readResponse();
+
+        if (response.type() == ResponseType.OK) {
+            System.out.println("PROXY -> response OK");
+            return true;
+        } else if (response.type() == ResponseType.GO_WAITING) {
+            System.out.println("PROXY -> response GO_WAITING");
+            return false;
+        } else if (response.type() == ResponseType.ERROR) {
+            throw new ServiceException("Error " + response.data().toString());
+        }
+        return false;
     }
 
     @Override

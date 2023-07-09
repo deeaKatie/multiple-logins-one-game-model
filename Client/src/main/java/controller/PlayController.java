@@ -1,19 +1,14 @@
 package controller;
 
-import dto.ActionDTO;
-import dto.ListItemDTO;
-import dto.ListItemsDTO;
-import dto.UpdateDTO;
+import dto.*;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.User;
 import services.IObserver;
@@ -22,6 +17,8 @@ import services.ServiceException;
 import utils.MessageAlert;
 
 import java.io.IOException;
+import java.util.Objects;
+import java.util.TimerTask;
 
 
 public class PlayController implements IObserver {
@@ -40,6 +37,12 @@ public class PlayController implements IObserver {
     Label leftLabel;
     @FXML
     Label rightLabel;
+    @FXML
+    Button makeActionButton;
+    @FXML
+    Button startGameButton;
+    @FXML
+    TextField gameInitDataTextField;
 
     public void setService(IServices service) {
         this.service = service;
@@ -64,6 +67,39 @@ public class PlayController implements IObserver {
     public void initModel(ListItemsDTO items) {
         modelLeft.setAll(items.getItems());
         leftListView.setItems(modelLeft);
+    }
+
+    public void init_WaitScreen() {
+        statusLabel.setVisible(true);
+        statusLabel.setText("Waiting for other players...");
+        leftListView.setVisible(false);
+        leftLabel.setVisible(false);
+        rightLabel.setVisible(false);
+        makeActionButton.setVisible(false);
+        gameInitDataTextField.setVisible(false);
+        startGameButton.setVisible(false);
+    }
+
+    public void init_PlayScreen() {
+        initVisuals();
+        statusLabel.setVisible(false);
+        leftListView.setVisible(true);
+        leftLabel.setVisible(true);
+        rightLabel.setVisible(true);
+        gameInitDataTextField.setVisible(false);
+        startGameButton.setVisible(false);
+        makeActionButton.setVisible(true);
+    }
+
+    public void init_StartScreen() {
+        statusLabel.setVisible(true);
+        statusLabel.setText("Click Button to Start!");
+        leftListView.setVisible(false);
+        leftLabel.setVisible(false);
+        rightLabel.setVisible(false);
+        gameInitDataTextField.setVisible(true);
+        startGameButton.setVisible(true);
+        makeActionButton.setVisible(false);
     }
 
     @FXML
@@ -96,5 +132,68 @@ public class PlayController implements IObserver {
         } catch (ServiceException e) {
             MessageAlert.showMessage(null, Alert.AlertType.ERROR,"Error making action", e.getMessage());
         }
+    }
+
+    public void startGame(ActionEvent actionEvent) {
+
+        if (!gameInitDataTextField.getText().isEmpty()) {
+            try {
+
+                StartGameDTO startGameDTO = new StartGameDTO();
+                startGameDTO.setUser(loggedUser);
+                startGameDTO.setData(gameInitDataTextField.getText());
+
+                Boolean status = service.startGame(startGameDTO);
+                if (!status) {
+                    init_WaitScreen();
+                }
+
+            } catch (ServiceException e) {
+                MessageAlert.showMessage(null, Alert.AlertType.ERROR,"Error starting game", e.getMessage());
+            }
+
+        }
+    }
+
+    @Override
+    public void gameStarted(GameDTO gameDTO) {
+        Platform.runLater(() -> {
+            init_PlayScreen();
+        });
+
+        // add any other data from gameDTO to the visuals
+    }
+
+    @Override
+    public void gameEndedLost(GameDTO gameDTO) {
+
+        // Do game ended stuff
+
+        Platform.runLater(() -> {
+            init_StartScreen();
+            new java.util.Timer().schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    // Return to start screen after 1 second
+                    init_StartScreen();
+                }
+            }, 1000);
+        });
+    }
+
+    @Override
+    public void gameEndedWon(GameDTO data) {
+        // Do game ended stuff
+
+        Platform.runLater(() -> {
+            init_StartScreen();
+            new java.util.Timer().schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    // Return to start screen after 1 second
+                    init_StartScreen();
+                }
+            }, 1000);
+        });
     }
 }

@@ -18,4 +18,6 @@ public class Game implements HasId<Long> {
     @MapKeyJoinColumn(name = "entities3_CLASSTR3_CLASSTR4") //name of join column in the join table
     private Map<CLASSTR3, CLASSTR4> entities3;
 
+    //@JsonBackReference - for somthing to not show in json
+
 }
