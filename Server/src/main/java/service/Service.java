@@ -165,8 +165,6 @@ public class Service implements IServices {
         }
     }
 
-
-    //todo endgame, response message, LOSER, WINNER
     public synchronized void endGame(GameDTO gameDTO, Map<Long, Boolean> usersStatus) throws ServiceException {
         //Map<Long, Boolean> usersSTatus -> id, status 1 - winner, 0 - loser
         System.out.println("SERVER -> endGame");
@@ -181,7 +179,7 @@ public class Service implements IServices {
         for (var player : usersStatus.entrySet()) {
             executor.execute(() -> {
                 try {
-                    if (true /* SMTH */) {
+                    if (player.getValue()) {
                         // WINNER
                         loggedClients.get(player.getKey()).gameEndedWon(gameDTO);
                     } else {
