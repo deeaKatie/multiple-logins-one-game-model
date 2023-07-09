@@ -4,17 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ccfa7e6b-654c-463b-a268-93519fa570db" name="Changes" comment="DB template &amp; logging">
-      <change afterPath="$PROJECT_DIR$/Model/src/main/java/model/ModelTemplate" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/Database.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
+    <list default="true" id="ccfa7e6b-654c-463b-a268-93519fa570db" name="Changes" comment="Model Template done &amp; DB fixed">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/src/main/java/model/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/Model/src/main/java/model/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/src/main/java/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/Model/src/main/java/model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Persistance/src/main/resources/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Persistance/src/main/resources/hibernate.cfg.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RESTServices/src/main/resources/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/RESTServices/src/main/resources/hibernate.cfg.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/hibernateORM.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Persistance/src/main/java/repository/RepoTemplate" beforeDir="false" afterPath="$PROJECT_DIR$/Persistance/src/main/java/repository/RepoTemplate" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Persistance/src/main/java/repository/UserDBRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Persistance/src/main/java/repository/UserDBRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RESTServices/src/main/java/rest/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/RESTServices/src/main/java/rest/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RESTServices/src/main/java/rest/RestService.java" beforeDir="false" afterPath="$PROJECT_DIR$/RESTServices/src/main/java/rest/RestService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/Database.db" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Database.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -113,27 +109,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;corretto-17&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Andreea/AppData/Local/SceneBuilder/SceneBuilder.exe&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;279174901a5dbb0f5c81f9163e56eeb2&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "jdk.selected.JAVA_MODULE": "corretto-17",
+    "last_opened_file_path": "C:/Users/Andreea/AppData/Local/SceneBuilder/SceneBuilder.exe",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "spring.configuration.checksum": "279174901a5dbb0f5c81f9163e56eeb2",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;sqlite&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "sqlite"
     ]
   }
-}</component>
+}]]></component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
+  </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\deeal\IdeaProjects\model examen mp\rezolvare_razboi\Model\src\main\java\gamestuff" />
@@ -155,7 +158,7 @@
       <recent name="model" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.rezolvare_razboi:Client [run]">
+  <component name="RunManager" selected="Spring Boot.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="rezolvare_razboi.Client.main" />
@@ -246,7 +249,7 @@
       <workItem from="1688663280065" duration="5500000" />
       <workItem from="1688726907524" duration="8365000" />
       <workItem from="1688847310299" duration="667000" />
-      <workItem from="1688890043970" duration="4126000" />
+      <workItem from="1688890043970" duration="6159000" />
     </task>
     <task id="LOCAL-00001" summary="first working version, w/ log in &amp; showing users">
       <created>1688574514383</created>
@@ -323,7 +326,15 @@
       <option name="project" value="LOCAL" />
       <updated>1688892156730</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Model Template done &amp; DB fixed">
+      <option name="closed" value="true" />
+      <created>1688894222443</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1688894222443</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -350,6 +361,7 @@
     <MESSAGE value="fxml cleared" />
     <MESSAGE value="working schelet with log in and log out" />
     <MESSAGE value="DB template &amp; logging" />
-    <option name="LAST_COMMIT_MESSAGE" value="DB template &amp; logging" />
+    <MESSAGE value="Model Template done &amp; DB fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="Model Template done &amp; DB fixed" />
   </component>
 </project>

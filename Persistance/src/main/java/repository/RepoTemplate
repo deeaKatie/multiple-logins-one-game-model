@@ -71,4 +71,18 @@ public class REPOTR implements IREPOTR{
         return entities;
     }
 
+    @Override
+        public CLASSTR findBy(String parameter) throws RepositoryException {
+            logger.traceEntry();
+            Query query = session.createQuery("from User where parameter = :p");
+            query.setParameter("p", parameter);
+            CLASSTR entity = (CLASSTR) query.uniqueResult();
+            if (entity == null) {
+                logger.error("No CLASSTR found!");
+                throw new RepositoryException("No CLASSTR found!");
+            }
+            logger.traceExit();
+            return entity;
+        }
+
 }

@@ -10,13 +10,19 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Component;
+
 import java.util.*;
 
+@Component
 public class UserDBRepository implements IUserRepository{
 
     private static final Logger logger= LogManager.getLogger(UserDBRepository.class.getName());
     private Session session;
 
+    @Autowired
     public UserDBRepository() {
         StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
         SessionFactory factory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
