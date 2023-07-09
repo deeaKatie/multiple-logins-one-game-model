@@ -29,6 +29,9 @@ public class StartServer {
         IUserRepository userRepository = new UserDBRepository();
         IGameDBRepository gameDBRepository = new GameDBRepository();
 
+        //addData(userRepository);
+        showData(userRepository);
+
         IServices service=new Service(userRepository, gameDBRepository);
 
         int serverPort = defaultPort;
@@ -54,4 +57,20 @@ public class StartServer {
 
         }
     }
+
+    private static void addData(IUserRepository userRepository) {
+        userRepository.add(new User("sam", "sam"));
+        userRepository.add(new User("a", "a"));
+        userRepository.add(new User("b", "b"));
+    }
+
+    private static void showData(IUserRepository userRepository) {
+        System.out.println("Users:");
+        for (User user : userRepository.getAll()) {
+            System.out.println(user);
+        }
+        System.out.println("Done printing users");
+    }
+
+
 }
