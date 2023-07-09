@@ -2,7 +2,8 @@ package rpcprotocol;
 
 public enum RequestType {
     LOGIN,
-    LOGOUT;
+    LOGOUT,
+    MADE_ACTION;
     private RequestType() {
     }
 }

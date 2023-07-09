@@ -3,7 +3,7 @@ package rpcprotocol;
 public enum ResponseType {
     OK,
     ERROR,
-    GAME_FINISHED;
+    UPDATE_DATA;
     private ResponseType() {
     }
 }

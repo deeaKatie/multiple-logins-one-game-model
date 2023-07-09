@@ -8,10 +8,10 @@
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PlayController">
    <children>
       <Label fx:id="usernameLabel" layoutX="14.0" layoutY="14.0" prefHeight="18.0" prefWidth="236.0" text="Hi, " />
-      <Label fx:id="gameStatusLabel" layoutX="263.0" layoutY="53.0" prefHeight="18.0" prefWidth="278.0" text="You won!" />
-      <ListView fx:id="leaderboardListView" layoutX="45.0" layoutY="155.0" prefHeight="200.0" prefWidth="200.0" />
-      <Label fx:id="leaderboardLabel" layoutX="117.0" layoutY="95.0" text="Leaderboard" />
-      <Label fx:id="yourGameLabel" layoutX="404.0" layoutY="95.0" text="Your game" />
+      <Label fx:id="statusLabel" layoutX="263.0" layoutY="53.0" prefHeight="18.0" prefWidth="278.0" text="You won!" />
+      <ListView fx:id="leftListView" layoutX="45.0" layoutY="155.0" prefHeight="200.0" prefWidth="200.0" />
+      <Label fx:id="leftLabel" layoutX="117.0" layoutY="95.0" text="Leaderboard" />
+      <Label fx:id="rightLabel" layoutX="404.0" layoutY="95.0" text="Your game" />
       <Button fx:id="logOutButton" layoutX="534.0" layoutY="11.0" mnemonicParsing="false" onAction="#logOutHandler" text="Log out" />
    </children>
 </AnchorPane>

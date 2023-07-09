@@ -1,5 +1,8 @@
 package controller;
 
+import dto.ListItemDTO;
+import dto.ListItemsDTO;
+import dto.UpdateDTO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -20,37 +23,47 @@ import java.io.IOException;
 
 
 public class PlayController implements IObserver {
-    ObservableList<User> modelLeaderboard = FXCollections.observableArrayList();
+    ObservableList<ListItemDTO> modelLeft = FXCollections.observableArrayList();
     private IServices service;
     private User loggedUser;
-
     @FXML
     Label usernameLabel;
     @FXML
-    Label gameStatusLabel;
+    Label statusLabel;
     @FXML
     Button logOutButton;
     @FXML
-    ListView<User> leaderboardListView;
+    ListView<ListItemDTO> leftListView;
     @FXML
-    Label leaderboardLabel;
+    Label leftLabel;
     @FXML
-    Label yourGameLabel;
-    @FXML
-    Button startGameButtonSS;
-
-    boolean sentToWaiting = false;
+    Label rightLabel;
 
     public void setService(IServices service) {
         this.service = service;
     }
+
     public void setUser(User user) {
         this.loggedUser = user;
     }
+
     public void initVisuals() {
         usernameLabel.setText("Hi, " + loggedUser.getUsername());
-        gameStatusLabel.setVisible(false);
+        statusLabel.setVisible(false);
+        ListItemsDTO items = null;
+        try {
+            items = service.getData();
+        } catch (ServiceException ex) {
+            MessageAlert.showMessage(null, Alert.AlertType.ERROR,"Error getting data", ex.getMessage());
+        }
+        initModel(items);
     }
+
+    public void initModel(ListItemsDTO items) {
+        modelLeft.setAll(items.getItems());
+        leftListView.setItems(modelLeft);
+    }
+
     @FXML
     public void logOutHandler() throws IOException {
         System.out.println("Logging out!\n");
@@ -70,5 +83,8 @@ public class PlayController implements IObserver {
         stage.setScene(scene);
     }
 
-
+    @Override
+    public void update(UpdateDTO updateDTO) {
+        initModel(updateDTO.getEntities());
+    }
 }

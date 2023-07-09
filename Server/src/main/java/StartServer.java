@@ -14,8 +14,7 @@ public class StartServer {
 
     public static void main(String[] args) {
 
-
-        //todo get rid of this if you want
+        // Server properties (port)
         Properties serverProps=new Properties();
         try {
             serverProps.load(StartServer.class.getResourceAsStream("server.properties"));
@@ -25,15 +24,6 @@ public class StartServer {
             System.err.println("Cannot find server.properties " + var21);
             return;
         }
-
-        IUserRepository userRepository = new UserDBRepository();
-        IGameDBRepository gameDBRepository = new GameDBRepository();
-
-        //addData(userRepository);
-        showData(userRepository);
-
-        IServices service=new Service(userRepository, gameDBRepository);
-
         int serverPort = defaultPort;
         try {
             serverPort = Integer.parseInt(serverProps.getProperty("server.port"));
@@ -42,6 +32,18 @@ public class StartServer {
             System.err.println("Using default port " + defaultPort);
         }
 
+
+        // Initialize repositories
+        IUserRepository userRepository = new UserDBRepository();
+
+        // Add / Show data
+        //addData(userRepository);
+        showData(userRepository);
+
+        // Initialize service
+        IServices service=new Service(userRepository);
+
+        // Start server
         System.out.println("Starting server on port: " + serverPort);
         AbstractServer server = new RpcConcurrentServer(serverPort, service);
         try {
@@ -59,12 +61,14 @@ public class StartServer {
     }
 
     private static void addData(IUserRepository userRepository) {
+        System.out.println("SERVER -> Adding data");
         userRepository.add(new User("sam", "sam"));
         userRepository.add(new User("a", "a"));
         userRepository.add(new User("b", "b"));
     }
 
     private static void showData(IUserRepository userRepository) {
+        System.out.println("SERVER -> Showing data");
         System.out.println("Users:");
         for (User user : userRepository.getAll()) {
             System.out.println(user);

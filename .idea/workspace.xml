@@ -4,13 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ccfa7e6b-654c-463b-a268-93519fa570db" name="Changes" comment="Model Template done &amp; DB fixed">
+    <list default="true" id="ccfa7e6b-654c-463b-a268-93519fa570db" name="Changes" comment="added rest services">
+      <change afterPath="$PROJECT_DIR$/Model/src/main/java/dto/ActionDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Model/src/main/java/dto/ListItemDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Model/src/main/java/dto/ListItemsDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Model/src/main/java/dto/UpdateDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Persistance/src/main/java/repository/RepoTemplate" beforeDir="false" afterPath="$PROJECT_DIR$/Persistance/src/main/java/repository/RepoTemplate" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Persistance/src/main/java/repository/UserDBRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Persistance/src/main/java/repository/UserDBRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RESTServices/src/main/java/rest/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/RESTServices/src/main/java/rest/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RESTServices/src/main/java/rest/RestService.java" beforeDir="false" afterPath="$PROJECT_DIR$/RESTServices/src/main/java/rest/RestService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/Database.db" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Database.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/controller/PlayController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/controller/PlayController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/resources/MainScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/MainScreen.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Networking/src/main/java/rpcprotocol/ClientRpcReflectionWorker.java" beforeDir="false" afterPath="$PROJECT_DIR$/Networking/src/main/java/rpcprotocol/ClientRpcReflectionWorker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Networking/src/main/java/rpcprotocol/RequestType.java" beforeDir="false" afterPath="$PROJECT_DIR$/Networking/src/main/java/rpcprotocol/RequestType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Networking/src/main/java/rpcprotocol/ResponseType.java" beforeDir="false" afterPath="$PROJECT_DIR$/Networking/src/main/java/rpcprotocol/ResponseType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Networking/src/main/java/rpcprotocol/ServicesRpcProxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/Networking/src/main/java/rpcprotocol/ServicesRpcProxy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/StartServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/StartServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/java/service/Service.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/service/Service.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/main/resources/server.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/resources/server.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Services/src/main/java/services/IObserver.java" beforeDir="false" afterPath="$PROJECT_DIR$/Services/src/main/java/services/IObserver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Services/src/main/java/services/IServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/Services/src/main/java/services/IServices.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -152,6 +162,7 @@
       <recent name="" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="dto" />
       <recent name="" />
       <recent name="rpcprotocol" />
       <recent name="utils" />
@@ -249,7 +260,7 @@
       <workItem from="1688663280065" duration="5500000" />
       <workItem from="1688726907524" duration="8365000" />
       <workItem from="1688847310299" duration="667000" />
-      <workItem from="1688890043970" duration="6159000" />
+      <workItem from="1688890043970" duration="9068000" />
     </task>
     <task id="LOCAL-00001" summary="first working version, w/ log in &amp; showing users">
       <created>1688574514383</created>
@@ -334,7 +345,15 @@
       <option name="project" value="LOCAL" />
       <updated>1688894222443</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="added rest services">
+      <option name="closed" value="true" />
+      <created>1688896268094</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1688896268094</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -362,6 +381,7 @@
     <MESSAGE value="working schelet with log in and log out" />
     <MESSAGE value="DB template &amp; logging" />
     <MESSAGE value="Model Template done &amp; DB fixed" />
-    <option name="LAST_COMMIT_MESSAGE" value="Model Template done &amp; DB fixed" />
+    <MESSAGE value="added rest services" />
+    <option name="LAST_COMMIT_MESSAGE" value="added rest services" />
   </component>
 </project>

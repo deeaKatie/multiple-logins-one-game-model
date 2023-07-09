@@ -1,5 +1,7 @@
 package rpcprotocol;
 
+import dto.ActionDTO;
+import dto.UpdateDTO;
 import model.User;
 import services.IObserver;
 import services.IServices;
@@ -114,4 +116,14 @@ public class ClientRpcReflectionWorker implements Runnable, IObserver {
         }
     }
 
+    @Override
+    public void update(UpdateDTO updateDTO) {
+        System.out.println("Update received");
+        Response response = new Response.Builder().type(ResponseType.UPDATE_DATA).data(updateDTO).build();
+        try {
+            sendResponse(response);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

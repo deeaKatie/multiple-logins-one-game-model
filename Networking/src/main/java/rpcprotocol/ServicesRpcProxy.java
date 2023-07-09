@@ -1,5 +1,7 @@
 package rpcprotocol;
 
+import dto.ActionDTO;
+import dto.UpdateDTO;
 import model.User;
 import services.IObserver;
 import services.IServices;
@@ -33,38 +35,6 @@ public class ServicesRpcProxy implements IServices {
         this.loggedUser = loggedUser;
     }
 
-    @Override
-    public User checkLogIn(User user, IObserver client) throws ServiceException {
-        this.initializeConnection();
-        Request req = (new Request.Builder()).type(RequestType.LOGIN).data(user).build();
-        this.sendRequest(req);
-        Response response = this.readResponse();
-        if (response.type() == ResponseType.OK) {
-            this.client = client;
-            User foundUser = (User)response.data();
-            user.setId(foundUser.getId());
-            loggedUser = foundUser;
-            return foundUser;
-        } else if (response.type() == ResponseType.ERROR) {
-            String err = response.data().toString();
-            this.closeConnection();
-            throw new ServiceException(err);
-        }
-        return null;
-    }
-
-    @Override
-    public void logout(User user) throws ServiceException {
-        Request req = (new Request.Builder()).type(RequestType.LOGOUT).data(user).build();
-        this.sendRequest(req);
-        Response response = this.readResponse();
-        this.closeConnection();
-        if (response.type() == ResponseType.ERROR) {
-            String err = response.data().toString();
-            throw new ServiceException(err);
-        }
-    }
-
     private void initializeConnection() throws ServiceException {
         try {
             this.connection = new Socket(this.host, this.port);
@@ -95,17 +65,7 @@ public class ServicesRpcProxy implements IServices {
         Thread tw = new Thread(new ReaderThread());
         tw.start();
     }
-    private void handleUpdate(Response response) {
-        System.out.println("PROXY -> handleUpdate");
-        System.out.println("RESPONSE -> " + response);
-//        if (response.type() == ResponseType.GAME_FINISHED) {
-//            //smth
-//        }
-    }
-    private boolean isUpdate(Response response) {
-        //return response.type() == ResponseType.GAME_FINISHED;
-        return false;
-    }
+
     private void sendRequest(Request request) throws ServiceException {
         try {
             this.output.writeObject(request);
@@ -130,7 +90,6 @@ public class ServicesRpcProxy implements IServices {
     private class ReaderThread implements Runnable {
         private ReaderThread() {
         }
-
         public void run() {
             while(!ServicesRpcProxy.this.finished) {
                 try {
@@ -158,5 +117,71 @@ public class ServicesRpcProxy implements IServices {
 
         }
     }
+
+    private void handleUpdate(Response response) {
+        System.out.println("PROXY -> handleUpdate");
+        System.out.println("RESPONSE -> " + response);
+        if (response.type() == ResponseType.UPDATE_DATA) {
+            client.update((UpdateDTO) response.data());
+        }
+    }
+    private boolean isUpdate(Response response) {
+        return response.type() == ResponseType.UPDATE_DATA;
+    }
+
+    @Override
+    public User checkLogIn(User user, IObserver client) throws ServiceException {
+        System.out.println("PROXY -> checkLogIn");
+
+        initializeConnection();
+        Request req = (new Request.Builder()).type(RequestType.LOGIN).data(user).build();
+        sendRequest(req);
+        Response response = readResponse();
+
+        if (response.type() == ResponseType.OK) {
+            this.client = client;
+            User foundUser = (User)response.data();
+            user.setId(foundUser.getId());
+            loggedUser = foundUser;
+            return foundUser;
+
+        } else if (response.type() == ResponseType.ERROR) {
+            String err = response.data().toString();
+            closeConnection();
+            throw new ServiceException(err);
+        }
+
+        return null;
+    }
+
+    @Override
+    public void logout(User user) throws ServiceException {
+        System.out.println("PROXY -> logout");
+        Request req = (new Request.Builder()).type(RequestType.LOGOUT).data(user).build();
+        sendRequest(req);
+        Response response = readResponse();
+        closeConnection();
+
+        if (response.type() == ResponseType.ERROR) {
+            String err = response.data().toString();
+            throw new ServiceException(err);
+        }
+    }
+
+    @Override
+    public void madeAction(ActionDTO action) throws ServiceException {
+        System.out.println("PROXY -> madeAction");
+        Request req = (new Request.Builder()).type(RequestType.MADE_ACTION).data(action).build();
+        sendRequest(req);
+        Response response = readResponse();
+
+        if (response.type() == ResponseType.OK) {
+            System.out.println("PROXY -> response OK");
+        } else if (response.type() == ResponseType.ERROR) {
+            throw new ServiceException("Error " + response.data().toString());
+        }
+    }
+
+
 
 }
