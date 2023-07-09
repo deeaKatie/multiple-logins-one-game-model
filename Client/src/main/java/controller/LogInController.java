@@ -42,7 +42,6 @@ public class LogInController {
 
             user = service.checkLogIn(user, playCtrl);
             System.out.println("USER: " + user);
-            System.out.println("sdada");
 
             playCtrl.setService(service);
             playCtrl.setUser(user);

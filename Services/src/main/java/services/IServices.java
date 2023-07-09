@@ -7,7 +7,7 @@ import model.User;
 public interface IServices {
     User checkLogIn(User user,IObserver client) throws ServiceException;
     void logout(User user) throws ServiceException;
-    ListItemsDTO getData() throws ServiceException;
+    ListItemsDTO getData(User user) throws ServiceException;
     void madeAction(ActionDTO action) throws ServiceException;
 
 }

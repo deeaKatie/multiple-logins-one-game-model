@@ -4,22 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ccfa7e6b-654c-463b-a268-93519fa570db" name="Changes" comment="added rest services">
-      <change afterPath="$PROJECT_DIR$/Model/src/main/java/dto/ActionDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Model/src/main/java/dto/ListItemDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Model/src/main/java/dto/ListItemsDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Model/src/main/java/dto/UpdateDTO.java" afterDir="false" />
+    <list default="true" id="ccfa7e6b-654c-463b-a268-93519fa570db" name="Changes" comment="fixed service, proxy, worker, controller">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/main/java/controller/LogInController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/controller/LogInController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/main/java/controller/PlayController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/java/controller/PlayController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/main/resources/MainScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/main/resources/MainScreen.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/src/main/java/dto/ListItemDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Model/src/main/java/dto/ListItemDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Networking/src/main/java/rpcprotocol/ClientRpcReflectionWorker.java" beforeDir="false" afterPath="$PROJECT_DIR$/Networking/src/main/java/rpcprotocol/ClientRpcReflectionWorker.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Networking/src/main/java/rpcprotocol/RequestType.java" beforeDir="false" afterPath="$PROJECT_DIR$/Networking/src/main/java/rpcprotocol/RequestType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Networking/src/main/java/rpcprotocol/ResponseType.java" beforeDir="false" afterPath="$PROJECT_DIR$/Networking/src/main/java/rpcprotocol/ResponseType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Networking/src/main/java/rpcprotocol/ServicesRpcProxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/Networking/src/main/java/rpcprotocol/ServicesRpcProxy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/java/StartServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/StartServer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/src/main/java/service/Service.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/service/Service.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/resources/server.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/resources/server.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Services/src/main/java/services/IObserver.java" beforeDir="false" afterPath="$PROJECT_DIR$/Services/src/main/java/services/IObserver.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Services/src/main/java/services/IServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/Services/src/main/java/services/IServices.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -169,7 +163,7 @@
       <recent name="model" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.Main">
+  <component name="RunManager" selected="Gradle.rezolvare_razboi:Client [run]">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="rezolvare_razboi.Client.main" />
@@ -260,7 +254,7 @@
       <workItem from="1688663280065" duration="5500000" />
       <workItem from="1688726907524" duration="8365000" />
       <workItem from="1688847310299" duration="667000" />
-      <workItem from="1688890043970" duration="9068000" />
+      <workItem from="1688890043970" duration="10233000" />
     </task>
     <task id="LOCAL-00001" summary="first working version, w/ log in &amp; showing users">
       <created>1688574514383</created>
@@ -353,7 +347,15 @@
       <option name="project" value="LOCAL" />
       <updated>1688896268094</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="fixed service, proxy, worker, controller">
+      <option name="closed" value="true" />
+      <created>1688899154096</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1688899154096</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -382,6 +384,7 @@
     <MESSAGE value="DB template &amp; logging" />
     <MESSAGE value="Model Template done &amp; DB fixed" />
     <MESSAGE value="added rest services" />
-    <option name="LAST_COMMIT_MESSAGE" value="added rest services" />
+    <MESSAGE value="fixed service, proxy, worker, controller" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed service, proxy, worker, controller" />
   </component>
 </project>

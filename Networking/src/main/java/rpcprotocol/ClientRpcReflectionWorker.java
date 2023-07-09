@@ -1,6 +1,7 @@
 package rpcprotocol;
 
 import dto.ActionDTO;
+import dto.ListItemsDTO;
 import dto.UpdateDTO;
 import model.User;
 import services.IObserver;
@@ -90,7 +91,7 @@ public class ClientRpcReflectionWorker implements Runnable, IObserver {
 
 
     private Response handleLOGIN(Request request) {
-        System.out.println("Login request ..." + request.type());
+        System.out.println("WORKER ->" + request.type());
         User user = (User) request.data();
 
         try {
@@ -103,13 +104,36 @@ public class ClientRpcReflectionWorker implements Runnable, IObserver {
     }
 
     private Response handleLOGOUT(Request request) {
-        System.out.println("Logout request...");
+        System.out.println("WORKER ->" + request.type());
         User user = (User) request.data();
 
         try {
-            this.service.logout(user);
-            this.connected = false;
+            service.logout(user);
+            connected = false;
             System.out.println("WORKER -> log out");
+            return (new Response.Builder()).type(ResponseType.OK).build();
+        } catch (ServiceException ex) {
+            return (new Response.Builder()).type(ResponseType.ERROR).data(ex.getMessage()).build();
+        }
+    }
+
+    private Response handleGET_DATA(Request request) {
+        System.out.println("WORKER ->" + request.type());
+
+        try {
+            ListItemsDTO items = service.getData((User) request.data());
+            return (new Response.Builder()).type(ResponseType.OK).data(items).build();
+        } catch (ServiceException ex) {
+            return (new Response.Builder()).type(ResponseType.ERROR).data(ex.getMessage()).build();
+        }
+    }
+
+    private Response handleMAKE_ACTION(Request request) {
+        System.out.println("WORKER ->" + request.type());
+        ActionDTO actionDTO = (ActionDTO) request.data();
+
+        try {
+            service.madeAction(actionDTO);
             return (new Response.Builder()).type(ResponseType.OK).build();
         } catch (ServiceException ex) {
             return (new Response.Builder()).type(ResponseType.ERROR).data(ex.getMessage()).build();

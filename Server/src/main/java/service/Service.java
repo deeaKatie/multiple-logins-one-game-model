@@ -1,6 +1,8 @@
 package service;
 
 import dto.ActionDTO;
+import dto.ListItemDTO;
+import dto.ListItemsDTO;
 import dto.UpdateDTO;
 import exception.RepositoryException;
 import model.User;
@@ -59,24 +61,43 @@ public class Service implements IServices {
         }
     }
 
-    public synchronized Iterable<?> getListData() throws ServiceException {
+    // gets data from repository in list form
+    public synchronized Iterable<User> getListData() throws ServiceException {
         return userRepository.getAll();
+    }
+
+    // encapsulates data in DTO
+    public synchronized ListItemsDTO getData(User user) throws ServiceException {
+        System.out.println("SERVER -> getData");
+        ListItemsDTO listItemsDTO = new ListItemsDTO();
+        for (var item : getListData()) {
+            ListItemDTO listItemDTO = new ListItemDTO();
+            listItemDTO.setUser(item);
+            listItemsDTO.addItem(listItemDTO);
+        }
+        return listItemsDTO;
     }
 
     public synchronized void madeAction(ActionDTO action) {
         System.out.println("SERVER -> madeAction");
+
+        // Do smth for action
+
+        // Update other users
         ExecutorService executor = Executors.newFixedThreadPool(defaultThreadsNo);
-        for (IObserver client : loggedClients.values()) {
+        for (var client : loggedClients.entrySet()) {
             System.out.println("SERVER -> madeAction -> client: " + client);
+
             executor.execute(() -> {
                 try {
                     UpdateDTO updateDTO = new UpdateDTO();
-                    updateDTO.setEntities(getListData());
-                    client.update(updateDTO);
-                } catch (ServiceException e) {
+                    updateDTO.setEntities(getData(userRepository.findById(client.getKey())));
+                    client.getValue().update(updateDTO);
+                } catch (ServiceException | RepositoryException e) {
                     e.printStackTrace();
                 }
             });
+
         }
     }
 

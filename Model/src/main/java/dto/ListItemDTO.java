@@ -27,4 +27,9 @@ public class ListItemDTO implements HasId<Long> {
     public void setId(Long aLong) {
 
     }
+
+    @Override
+    public String toString() {
+        return "user= " + user;
+    }
 }

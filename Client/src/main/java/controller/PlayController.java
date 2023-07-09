@@ -1,10 +1,12 @@
 package controller;
 
+import dto.ActionDTO;
 import dto.ListItemDTO;
 import dto.ListItemsDTO;
 import dto.UpdateDTO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -52,7 +54,7 @@ public class PlayController implements IObserver {
         statusLabel.setVisible(false);
         ListItemsDTO items = null;
         try {
-            items = service.getData();
+            items = service.getData(loggedUser);
         } catch (ServiceException ex) {
             MessageAlert.showMessage(null, Alert.AlertType.ERROR,"Error getting data", ex.getMessage());
         }
@@ -86,5 +88,13 @@ public class PlayController implements IObserver {
     @Override
     public void update(UpdateDTO updateDTO) {
         initModel(updateDTO.getEntities());
+    }
+
+    public void makeAction(ActionEvent actionEvent) {
+        try {
+            service.madeAction(new ActionDTO());
+        } catch (ServiceException e) {
+            MessageAlert.showMessage(null, Alert.AlertType.ERROR,"Error making action", e.getMessage());
+        }
     }
 }

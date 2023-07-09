@@ -1,6 +1,7 @@
 package rpcprotocol;
 
 import dto.ActionDTO;
+import dto.ListItemsDTO;
 import dto.UpdateDTO;
 import model.User;
 import services.IObserver;
@@ -167,6 +168,24 @@ public class ServicesRpcProxy implements IServices {
             throw new ServiceException(err);
         }
     }
+
+    @Override
+    public ListItemsDTO getData(User user) throws ServiceException {
+        System.out.println("PROXY -> getData");
+        Request req = (new Request.Builder()).type(RequestType.GET_DATA).data(user).build();
+        sendRequest(req);
+        Response response = readResponse();
+
+        if (response.type() == ResponseType.OK) {
+            System.out.println("PROXY -> response OK");
+            return (ListItemsDTO) response.data();
+        } else if (response.type() == ResponseType.ERROR) {
+            throw new ServiceException("Error " + response.data().toString());
+        }
+
+        return null;
+    }
+
 
     @Override
     public void madeAction(ActionDTO action) throws ServiceException {
